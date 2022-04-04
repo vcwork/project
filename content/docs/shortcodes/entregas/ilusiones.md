@@ -1,6 +1,12 @@
 # Esta es la entrega sombre ilusiones
 
-{{< p5-div sketch="/showcase/sketches/rgb.js">}}
+{{< details title="p5-iframe markdown" open=false >}}
+```html
+{{</* p5-iframe sketch="/showcase/sketches/rgb.js" width="725" height="425 */>}}
+```
+{{< /details >}}
+
+{{< p5-iframe sketch="/showcase/sketches/rgb.js" width="725" height="425" >}}
 
 
 
