@@ -47,4 +47,4 @@ new p5((p) =>{
 
         angle += rotationSpeed;
     }
-})
+}, "rgb");
