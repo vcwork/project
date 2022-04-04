@@ -8,16 +8,16 @@ new p5((p) =>{
     }
 
     p.setup = function (){
-        createCanvas(400, 400);
-        noStroke();
-    }
+        p.createCanvas(400, 400);
+        p.noStroke();
+    };
     
     p.draw = function(){
         currentAnglePercentage++;
-        background(255);
+        p.background(255);
         noStroke;
-        angleMode(DEGREES);
-        ellipseMode(CENTER);
+        p.angleMode(DEGREES);
+        p.ellipseMode(CENTER);
 
         let posX = 200; //change the x axis
         let posY = 200; //change the y axis
@@ -25,8 +25,8 @@ new p5((p) =>{
         let rotationSpeed = 0; //change the rotation speed
 
         let radius = 0;
-        let x = radius * cos(angle);
-        let y = radius * sin(angle);
+        let x = radius * p.cos(angle);
+        let y = radius * p.sin(angle);
 
         const c1a1 = 0 + getCurrentAngle();
         const c1a2 = 120 + getCurrentAngle();
@@ -37,14 +37,14 @@ new p5((p) =>{
         const c3a1 = 240 + getCurrentAngle();
         const c3a2 = 360 + getCurrentAngle();
 
-        fill('red');
-        arc(posX + x, posY + y, reSize, reSize, c1a1, c1a2);
+        p.fill('red');
+        p.arc(posX + x, posY + y, reSize, reSize, c1a1, c1a2);
 
-        fill('blue');
-        arc(posX + x, posY + y, reSize, reSize, c2a1, c2a2);
+        p.fill('blue');
+        p.arc(posX + x, posY + y, reSize, reSize, c2a1, c2a2);
 
-        fill('green');
-        arc(posX + x, posY + y, reSize, reSize, c3a1, c3a2);
+        p.fill('green');
+        p.arc(posX + x, posY + y, reSize, reSize, c3a1, c3a2);
 
         angle += rotationSpeed;
     }
