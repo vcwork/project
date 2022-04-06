@@ -6,6 +6,6 @@
 ```
 {{< /details >}}
 
-{{< p5-iframe sketch="/project/sketches/rgb.js" width="400" height="400" >}}
+{{< p5-iframe sketch="/project/sketches/rgb.js" width="725" height="425" >}}
 
 

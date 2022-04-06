@@ -9,10 +9,17 @@ function setup() {
   cnv.mouseClicked(changeGray);
   sp =2;
   g=100;
+
 }
 
 function draw() { 
   background(g);
+  
+  textSize(38);
+  fill('white');
+  text(sp, 15, 35);
+  
+  
   translate (200,200);
   rotate (radians (deg));
   ellipse(0,0,200,200);
@@ -25,6 +32,8 @@ function draw() {
   fill('green');
   arc(0, 0, 200, 200, 0, 360);
   deg+=sp;
+  print(sp);
+ 
 }
 
 // Esta funcion se activa cuando se da click en el canvas aumenta la velocidad
