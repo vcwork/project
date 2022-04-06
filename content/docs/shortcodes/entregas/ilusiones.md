@@ -28,9 +28,10 @@ Es una ilusión óptica en la que se aparenta movimiento cuando en realidad se p
 ## Resultados
 
 {{< details title="Ver Código" open=false >}}
-```html
+```js
 {{</*
-    // Variables
+// Adaptado del código de Lindsey Piscitell [this](https://editor.p5js.org/LindseyPiscitell/sketches/SJgoswgp)
+// Variables
 var deg = 0;
 var sp;
 let cnv,g;
