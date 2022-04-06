@@ -3,14 +3,24 @@
 var deg = 0;
 var sp;
 let cnv,g;
+var reset_button;
 
 //Dibuja el canvas
 function setup() { 
   cnv = createCanvas(400, 400);
   cnv.mouseClicked(changeGray);
-  sp =0;
+  sp =2;
   g=100;
+  
+  reset_button = createButton("Reset");  
 
+  // Posicion del boton
+  reset_button.position(15, 50);
+  reset_button.mouseClicked(reset);
+
+}
+function reset(){
+  sp = 0;
 }
 
 function draw() { 
@@ -44,4 +54,5 @@ function mouseClicked() {
 // Esta funcion se activa cuando se da click en el canvas cambia el color en escala de grises
 function changeGray() {
   g = random(0, 200);
+
 }
