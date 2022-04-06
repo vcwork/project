@@ -1,3 +1,4 @@
+// Adaptado del código de Lindsey Piscitell [this](https://editor.p5js.org/LindseyPiscitell/sketches/SJgoswgp)
 // Variables
 var deg = 0;
 var sp;
@@ -7,7 +8,7 @@ let cnv,g;
 function setup() { 
   cnv = createCanvas(400, 400);
   cnv.mouseClicked(changeGray);
-  sp =2;
+  sp =0;
   g=100;
 
 }
