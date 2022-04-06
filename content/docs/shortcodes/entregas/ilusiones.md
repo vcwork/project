@@ -2,7 +2,8 @@
 
 ## Introducción
 Se presentará el efecto estroboscópico en el cual se parte de imágenes que se presentan de forma continua generando lo que parece ser un movimiento fluido, esto debido al efecto Phi, dentro de los posibles consecuencias que este efecto puede llegar a tener se encuentra una que relaciona el movimiento y la percepción de los colores en las pantallas de los computadores. Al seguir los pasos del trabajo realizado por Michael Bach fue posible reproducir el fenómeno. Para mostrar el trabajo realizado primero se hará una breve contextualización desde la teoría del fenómeno, luego este será reproducido utilizando p5.js y por último se concluirá  acerca de lo hallado.
-Contexto
+
+## Contexto
 ### Aliasing
 Es un fenómeno que causa que diferentes señales se vuelven indistinguibles (o alias de otras) cuando son muestreadas. También se refiere a cuando una señal reconstruida a través de muestras es distinta a su original continua. Cuando este fenómeno se presenta con muestras en el tiempo, como el efecto estroboscópico, se denomina aliasing temporal; cuando se presenta con muestras en el espacio, como con los patrones moiré, se denomina aliasing espacial.
 
