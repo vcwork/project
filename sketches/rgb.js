@@ -38,7 +38,7 @@ function draw() {
 
 // Esta funcion se activa cuando se da click en el canvas aumenta la velocidad
 function mouseClicked() {
-  sp = sp + 3;
+  sp = sp + 10;
 }
 // Esta funcion se activa cuando se da click en el canvas cambia el color en escala de grises
 function changeGray() {
