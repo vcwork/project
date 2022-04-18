@@ -7,7 +7,9 @@ type: docs
 
 ## Integrantes
 
-### Óscar Alejandro Gómez Suárez
+### Oscar Alejandro Gómez Suarez
+
+Estudiante octavo semestre, con interes en la animación (con respecto a la materia) y poderla usar como un medio para contar una historia. En los tiempos libres gusta de leer y escuchar historias. 
 
 ### Fernando Moreno Bautista
 
@@ -17,4 +19,4 @@ Estudiante de 9no semestre, apasionado por la inteligencia artifical, las redes 
 
 ## Log de encuentros
 
-No se han tenido encuentros hasta ahora.
+Primer encuentro - Lunes 04 de Abril del 2022
