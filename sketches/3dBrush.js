@@ -23,7 +23,7 @@ let points;
 let record;
 
 function setup() {
-  createCanvas(600, 450, WEBGL);
+  createCanvas(800, 800, WEBGL);
   // easycam stuff
   let state = {
     distance: 250,           // scalar
