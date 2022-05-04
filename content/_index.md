@@ -20,3 +20,4 @@ Estudiante de 9no semestre, apasionado por la inteligencia artifical, las redes 
 ## Log de encuentros
 
 Primer encuentro - Lunes 04 de Abril del 2022
+Segundo Encuentro - Miercoles 04 de Mayo del 2022
