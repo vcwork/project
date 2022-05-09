@@ -24,6 +24,7 @@ function draw() {
 	background(51);
 	izzm.display();
 	izzm.pos.x = map(round(handX), 50, 300, width, 0);
+    console.log(izzm.pos.x);
 	izzm.pos.y = map(round(handY), 50, 300, height, 0);
 }
 
