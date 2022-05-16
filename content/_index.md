@@ -12,6 +12,7 @@ type: docs
 Estudiante octavo semestre, con interes en la animación (con respecto a la materia) y poderla usar como un medio para contar una historia. En los tiempos libres gusta de leer y escuchar historias. 
 
 ### Fernando Moreno Bautista
+
 Estudiante de noveno semestre, me gusta la programación en general, encusntro algo interesante en este tema ya que hoy en dia nos rodean los algoritmos para cada cosa que hagamos en el dia a dia. En mis tiempos libres me gusta la musica y practicar el Skateboarding.
 
 ### Gerson Nicolás Pineda Lara
@@ -20,8 +21,22 @@ Estudiante de 9no semestre, apasionado por la inteligencia artifical, las redes 
 
 ## Log de encuentros
 
-Primer encuentro - Lunes 04 de Abril del 2022
+### Lunes 4 de abril del 2022
 
-Segundo Encuentro - Miercoles 04 de Mayo del 2022
+Se examinó documentación sobre el efecto estroboscópico tanto en la vida real como en los sistemas computacionales. Se determinó que había otros efectos involucrados que también debían ser examinados a profundidad para entender el efecto estroboscópico.
 
-Tercer encuentro - Lunes 09 de Mayo del 2022
+### Miércoles 4 de mayo del 2022
+
+Se estudió a profundidad el código de *3DBrush* para entender su funcionamiento. Luego, se realizaron propuestas para desarrollar el taller para que, al final, se determinara trabajar con el dispositivo Leap Motion e iniciara el proceso de entendimiento del dispositivo.
+
+### Lunes 9 de mayo del 2022
+
+Tras disponer del dispositivo Leap Motion se inició la implementación de la librería para comprobar su funcionamiento e integrarlo al código ya dispuesto. Se revisó la documentación disponible en la página del fabricante, así como se consultó la información disponible en foros, pero no fue posible lograr la interconexión entre el código JS y el dispositivo. Se exploraron otras tecnologías y metodologías, en general centradas en detectar gestos y profundidad de la mano a través de la cámara integrada del computador.
+
+### Miércoles 11 de mayo del 2022
+
+Se determina dejar de lado la tecnología Leap debido a los problemas técnicos que impidieron su funcionamiento integrado con JS. Como ya se preveía la dificultad de determinar la profundidad de un objeto frente a una cámara, se decide explorar el uso de gestos de mano. Para esto se examina Media Pipe, una librería de código libre que ofrece soluciones de aprendizaje de máquina para su implementación en *streaming media*. Mediante esta librería es posible hacer seguimiento a puntos específicos de la mano mediante la *webcam*.
+
+### Lunes 16 de mayo del 2022
+
+Se continúa en la exploración e implementación de la librería Media Pipe. Se procesa la información retornada por la librería para procesar el movimiento de la brocha en *3DBrush*.
