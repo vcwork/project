@@ -83,8 +83,8 @@ Leap.loop(options, function(frame){
 		  positionX = hand.palmPosition[0];					// output x-coordinate of hand
           positionY = hand.palmPosition[1];					// output y-coordinate of hand
 		  grab = hand.grabStrength;
-          //console.log("x: " +positionX);
-          //console.log("spread: " +grab);
+          console.log("x: " +positionX);
+          console.log("spread: " +grab);
           //xSpeed += (positionX/500);
           //barX = positionX+(width/2);
           barY = -positionY+height;
