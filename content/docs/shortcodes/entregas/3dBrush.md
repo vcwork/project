@@ -2,7 +2,7 @@
 
 ## Introducción
 
-A continuación se muestra una copia del codigo
+A continuación se muestra un clon 
 
 
 
@@ -14,3 +14,4 @@ A continuación se muestra una copia del codigo
 
 {{< p5-iframe sketch="/project/sketches/handTracker.js" lib1="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-core@1.7.4/dist/tf-core.min.js" lib2="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-converter@1.7.4/dist/tf-converter.min.js" lib3="https://cdn.jsdelivr.net/npm/@tensorflow-models/handpose@0.0.4/dist/handpose.min.js" lib4="" width="780" height="780" >}}
 
+{{< p5-iframe sketch="/project/sketches/leapmotion.js" lib1="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" lib2="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js" lib3="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" lib4="../detection.js" lib5="" width="780" height="780" >}}

@@ -1,94 +1,84 @@
-var barX = 50;
-var barY = 200;
 
-var xPos = 200;
-var yPos = 200;
-var xSpeed = 0;
+let canvas;
 
-var ballXspeed = 4;
-var ballYspeed = 6;
+let sketch = function(p){
+  p.setup = function(){
+    canvas = p.createCanvas(640, 480);
+    canvas.id("canvas");
 
-var ballXpos = 300;
-var ballYpos = 200;
+    p.colorMode(p.HSB);
+  }
 
-function setup() {
-  createCanvas(600, 400);
-  background(0);
-  rectMode(CORNER);
-  ellipseMode(CENTER);
-  fill(255);
+  p.draw = function(){
+    p.clear();
+    if(detections != undefined){
+      if(detections.multiHandLandmarks != undefined){
+          //p.drawHands();
+          // p.drawParts();
+
+          p.drawLines([0, 5, 9, 13, 17, 0]);//palm
+          p.drawLines([0, 1, 2, 3 ,4]);//thumb
+          p.drawLines([5, 6, 7, 8]);//index finger
+          p.drawLines([9, 10, 11, 12]);//middle finger
+          p.drawLines([13, 14, 15, 16]);//ring finger
+          p.drawLines([17, 18, 19, 20]);//pinky
+
+          p.drawLandmarks([0, 1], 0);//palm base
+          p.drawLandmarks([1, 5], 60);//thumb
+          p.drawLandmarks([5, 9], 120);//index finger
+          p.drawLandmarks([9, 13], 180);//middle finger
+          p.drawLandmarks([13, 17], 240);//ring finger
+          p.drawLandmarks([17, 21], 300);//pinky
+      }
+    }
+  }
+
+  p.drawHands = function(){
+    for(let i=0; i<detections.multiHandLandmarks.length; i++){
+      for(let j=0; j<detections.multiHandLandmarks[i].length; j++){
+        let x = detections.multiHandLandmarks[i][j].x * p.width;
+        let y = detections.multiHandLandmarks[i][j].y * p.height;
+        let z = detections.multiHandLandmarks[i][j].z;
+        // p.strokeWeight(0);
+        // p.textFont('Helvetica Neue');
+        // p.text(j, x, y);
+        p.stroke(255);
+        p.strokeWeight(10);
+        p.point(x, y);
+      }
+    }
+  }
+
+  p.drawLandmarks = function(indexArray, hue){
+    p.noFill();
+    p.strokeWeight(8);
+    for(let i=0; i<detections.multiHandLandmarks.length; i++){
+      for(let j=indexArray[0]; j<indexArray[1]; j++){
+        let x = detections.multiHandLandmarks[i][j].x * p.width;
+        let y = detections.multiHandLandmarks[i][j].y * p.height;
+        // let z = detections.multiHandLandmarks[i][j].z;
+        p.stroke(hue, 40, 255);
+        p.point(x, y);
+      }
+    }
+  }
+
+  p.drawLines = function(index){
+    p.stroke(0, 0, 255);
+    p.strokeWeight(3);
+    for(let i=0; i<detections.multiHandLandmarks.length; i++){
+      for(let j=0; j<index.length-1; j++){
+        let x = detections.multiHandLandmarks[i][index[j]].x * p.width;
+        let y = detections.multiHandLandmarks[i][index[j]].y * p.height;
+        // let z = detections.multiHandLandmarks[i][index[j]].z;
+
+        let _x = detections.multiHandLandmarks[i][index[j+1]].x * p.width;
+        let _y = detections.multiHandLandmarks[i][index[j+1]].y * p.height;
+        // let _z = detections.multiHandLandmarks[i][index[j+1]].z;
+        p.line(x, y, _x, _y);
+      }
+    }
+  }
 }
 
-function draw() {
-  background(0);            // erase everything
-  text("use your hand above the Leap Motion device",20,30);
-  if(ballXpos>width){
-     ballXspeed = -ballXspeed; 
-  }
-  if(ballYpos>height){
-     ballYspeed = -ballYspeed; 
-  }
-  if(ballXpos<0){
-     ballXspeed = -ballXspeed; 
-  }
-  if(ballYpos<0){
-     ballYspeed = -ballYspeed; 
-  }
-  
-  ballXpos += ballXspeed;
-  ballYpos += ballYspeed;
-  var check = testBorder();
-  if (check == false){
-    barX += xSpeed;
-  }else{
-    xSpeed = 0;
-  }
-  rect(barX, barY, 4,60);
-  ellipse(ballXpos, ballYpos, 10, 10);
-  hit = collideRectCircle(barX,barY,4,60,ballXpos,ballYpos,10);
-  if(hit == true){
-    ballXspeed = -ballXspeed;
-  }
-}
-
-
-function testBorder(){
-  var colission = false;
-  if (barX > width-60 ){
-      colission = true;
-      barX = width-60;
-  }
-  if(barX < 0){
-    colission = true;
-      barX = 0;   
-  }
-  return colission;
-}
-
-//----------------------------------------------------
-
-
-var hand, finger;
-var positionX = 0;
-var positionY = 0;
-var grab;
-
-var options = {enableGestures: true};
-console.log("running…");
-
-Leap.loop(options, function(frame){
-	if (frame.hands.length  > 0){
-	  for(var i = 0; i < frame.hands.length; i++){
-		  var hand = frame.hands[i];
-		  positionX = hand.palmPosition[0];					// output x-coordinate of hand
-          positionY = hand.palmPosition[1];					// output y-coordinate of hand
-		  grab = hand.grabStrength;
-          console.log("x: " +positionX);
-          console.log("spread: " +grab);
-          //xSpeed += (positionX/500);
-          //barX = positionX+(width/2);
-          barY = -positionY+height;
-	  }
-	}  
-});
-
+let myp5 = new p5(sketch);
