@@ -2,6 +2,6 @@
 bookCollapseSection: true
 ---
 
-# Entregas de los workshops
+# Entregas de workshops
 
-Aca estaran las entregas a lo largo del semestre
+En esta sección se irán colocando las entregas programadas.
