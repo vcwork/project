@@ -39,4 +39,4 @@ Se determina dejar de lado la tecnología Leap debido a los problemas técnicos 
 
 ### Lunes 16 de mayo del 2022
 
-Se continúa en la exploración e implementación de la librería Media Pipe. Se procesa la información retornada por la librería para procesar el movimiento de la brocha en *3DBrush*.
+Se continúa en la exploración e implementación de la librería Media Pipe. Se procesa la información retornada por la librería para procesar el movimiento de la brocha en *3DBrush*. Por otro lado, también se examina la librería ML5.
