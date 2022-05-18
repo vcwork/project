@@ -145,8 +145,6 @@ function draw() {
 
   lands = hand(myHands,true);
 
-  console.log(lands);
-
   update(lands);
   background(120);
   push();
@@ -161,19 +159,20 @@ function draw() {
     brush(point);
     pop();
   }
+
+  
 }
 
 function update(lands) {
-  
   //console.log(mouseY);
   let dx = abs(mouseX - pmouseX);
   let dy = abs(mouseY - pmouseY);
   speed = constrain((dx + dy) / (2 * (width - height)), 0, 1);
   if(lands != null){
-    //console.log(lands[0][1]);
+    console.log("Lee de las manos");
     if (record) {
       points.push({
-        worldPosition: treeLocation([mouseX, mouseY, depth.value()], { from: 'SCREEN', to: 'WORLD' }),
+        worldPosition: treeLocation([lands[0][0], lands[0][1], lands[0][2]], { from: 'SCREEN', to: 'WORLD' }),
         color: color.color(),
         speed: speed
       });
@@ -181,8 +180,9 @@ function update(lands) {
   }
   else{
     if (record) {
+      console.log("Lee del mouse")
       points.push({
-        worldPosition: treeLocation([mouseX, mouseY, depth.value()], { from: 'SCREEN', to: 'WORLD' }),
+        worldPosition: treeLocation([mouseX, mouseY,depth.value() ], { from: 'SCREEN', to: 'WORLD' }),
         color: color.color(),
         speed: speed
       });
