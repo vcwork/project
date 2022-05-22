@@ -39,4 +39,8 @@ Se determina dejar de lado la tecnología Leap debido a los problemas técnicos 
 
 ### Lunes 16 de mayo del 2022
 
-Se continúa en la exploración e implementación de la librería Media Pipe. Se procesa la información retornada por la librería para procesar el movimiento de la brocha en *3DBrush*. Por otro lado, también se examina la librería ML5.
+Se continúa en la exploración e implementación de la librería Media Pipe. Se procesa la información retornada por la librería para procesar el movimiento de la brocha en *3DBrush*. Por otro lado, también se examina la librería ML5. Aunque Media Pipe, en efecto, es capaz de detectar las coordenadas e imprimirlas en consola, no ha sido posible procesarlas para usarlas en el código.
+
+### Miércoles 18 de mayo del 2022
+
+Se continúa en la exploración e implemetación de las librerías Media Pipe y ML5. Se evidencia que la librería Media Pipe puede causar que la cámara del dispositivo falle de manera aleatorio, por lo que se analiza cambiar el punto que se está desarrollando.

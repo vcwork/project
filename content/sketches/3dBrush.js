@@ -36,6 +36,12 @@ var myHands = []; // hands detected by mediapipe
 
 var capture; // webcam capture, managed by p5.js
 
+// Definir el tamaño del espacio.
+var spaceSize = [1000, 1000, 1000];
+// Definir los límites de las coordenadas en el espacio.
+var spaceExtrCoord = [[spaceSize[0]/-2, spaceSize[1]/-2, spaceSize[1]/-2],
+  [spaceSize[0]/2, spaceSize[1]/2, spaceSize[1]/2]];
+
 
 
 // Load the MediaPipe handpose model assets.
@@ -46,6 +52,53 @@ handpose.load().then(function(_model){
 })
 /// / / / / / / / // 
 
+function limitedCoordinates(original_coord) {
+  norm_coord = [0, 0, 0];
+  // norm_coord = [(original_coord[0] - spaceExtrCoord[0][0]) / spaceSize[0],
+  // (original_coord[1] - spaceExtrCoord[0][1]) / spaceSize[1],
+  // (original_coord[2] - spaceExtrCoord[0][2]) / spaceSize[2]];
+  if ((original_coord[0] < spaceExtrCoord[0][0]) || (original_coord[0] > spaceExtrCoord[1][0])) {
+    if (original_coord[0] < 0) {
+      norm_coord[0] = spaceExtrCoord[0][0];
+    } else {
+      norm_coord[0] = spaceExtrCoord[1][0];
+    }
+  } else {
+    norm_coord[0] = original_coord[0];
+  }
+
+  if ((original_coord[1] < spaceExtrCoord[0][1]) || (original_coord[1] > spaceExtrCoord[1][1])) {
+    if (original_coord[1] < 0) {
+      norm_coord[1] = spaceExtrCoord[0][1];
+    } else {
+      norm_coord[1] = spaceExtrCoord[1][1];
+    }
+  } else {
+    norm_coord[1] = original_coord[1];
+  }
+
+  if ((original_coord[1] < spaceExtrCoord[0][1]) || (original_coord[1] > spaceExtrCoord[1][1])) {
+    if (original_coord[1] < 0) {
+      norm_coord[1] = spaceExtrCoord[0][1];
+    } else {
+      norm_coord[1] = spaceExtrCoord[1][1];
+    }
+  } else {
+    norm_coord[1] = original_coord[1];
+  }
+
+  if ((original_coord[2] < spaceExtrCoord[0][2]) || (original_coord[1] > spaceExtrCoord[1][2])) {
+    if (original_coord[2] < 0) {
+      norm_coord[2] = spaceExtrCoord[0][2];
+    } else {
+      norm_coord[2] = spaceExtrCoord[1][2];
+    }
+  } else {
+    norm_coord[2] = original_coord[2];
+  }
+
+  return norm_coord;
+}
 
 function setup() {
   createCanvas(750, 750, WEBGL);
@@ -145,8 +198,6 @@ function draw() {
 
   lands = hand(myHands,true);
 
-  console.log(lands);
-
   update(lands);
   background(120);
   push();
@@ -161,19 +212,20 @@ function draw() {
     brush(point);
     pop();
   }
+
+  
 }
 
 function update(lands) {
-  
   //console.log(mouseY);
   let dx = abs(mouseX - pmouseX);
   let dy = abs(mouseY - pmouseY);
   speed = constrain((dx + dy) / (2 * (width - height)), 0, 1);
   if(lands != null){
-    //console.log(lands[0][1]);
+    console.log("Lee de las manos");
     if (record) {
       points.push({
-        worldPosition: treeLocation([mouseX, mouseY, depth.value()], { from: 'SCREEN', to: 'WORLD' }),
+        worldPosition: treeLocation([lands[0][0], lands[0][1], lands[0][2]], { from: 'SCREEN', to: 'WORLD' }),
         color: color.color(),
         speed: speed
       });
@@ -181,8 +233,9 @@ function update(lands) {
   }
   else{
     if (record) {
+      console.log("Lee del mouse")
       points.push({
-        worldPosition: treeLocation([mouseX, mouseY, depth.value()], { from: 'SCREEN', to: 'WORLD' }),
+        worldPosition: treeLocation([mouseX, mouseY,depth.value() ], { from: 'SCREEN', to: 'WORLD' }),
         color: color.color(),
         speed: speed
       });
