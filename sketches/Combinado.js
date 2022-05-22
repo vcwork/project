@@ -224,9 +224,9 @@ function update() {
       }if(handsfree.data.hands.curPinch[1][0].x  < posPointer[1][0].x){
         dx += 10 ;
       }if(handsfree.data.hands.curPinch[1][0].y  >  posPointer[1][0].y){
-        dy -= 10 ;
+        dy += 10 ;
       }if(handsfree.data.hands.curPinch[1][0].y   < posPointer[1][0].y){
-        dy += 10;
+        dy -= 10;
       } 
     }
     console.log(dx, "  ", dy, " ", depth);
