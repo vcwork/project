@@ -13,7 +13,7 @@ Estudiante octavo semestre, con interes en la animación (con respecto a la mate
 
 ### Fernando Moreno Bautista
 
-Estudiante de noveno semestre, me gusta la programación en general, encusntro algo interesante en este tema ya que hoy en dia nos rodean los algoritmos para cada cosa que hagamos en el dia a dia. En mis tiempos libres me gusta la musica y practicar el Skateboarding.
+Estudiante de noveno semestre, me gusta la programación en general, encuentro algo interesante en este tema ya que hoy en dia nos rodean los algoritmos para cada cosa que hagamos en el día a día. En mis tiempos libres me gusta la música y practicar el Skateboarding.
 
 ### Gerson Nicolás Pineda Lara
 

@@ -2,13 +2,14 @@
 
 ## Ray tracing
 
-
 ## Introducción
-El ray tracing es una de las dos soluciones más populares dadas para el renderizado de objetos de tres dimensiones en pantallas de sólo dos. Esta técnica permite la creación de imágenes que se asemejan a la realidad de una forma relativamente sencilla. A continuación se muestra la historia de la técnica, la  teoría que se encuentra detrás y una aplicación que permite visualizar a rasgos generales como es el funcionamiento del ray tracing, es decir la realización de una prueba de concepto. De la revisión del marco teórico es posible concluir que esta técnica es cada vez más usada debido a los adelantos computacionales y las nuevas necesidades que surgen en la computación gráfica. 
+
+El ray tracing es una de las dos soluciones más populares dadas para el renderizado de objetos de tres dimensiones en pantallas de sólo dos. Esta técnica permite la creación de imágenes que se asemejan a la realidad de una forma relativamente sencilla. A continuación se muestra la historia de la técnica, la  teoría que se encuentra detrás y una aplicación que permite visualizar a rasgos generales como es el funcionamiento del ray tracing, es decir la realización de una prueba de concepto. De la revisión del marco teórico es posible concluir que esta técnica es cada vez más usada debido a los adelantos computacionales y las nuevas necesidades que surgen en la computación gráfica.
 
 ## Contexto
 
 ### Historia
+
 Con la finalidad de obtener en las pantallas objetos cada vez más parecidos a los que se encuentran en la realidad se comenzó a intentar producir los gráficos con conceptos de física, en donde era posible ver mediante los rayos de luz que llegaban al observador, este proceso en el cual se seguía un rayo de luz que salía de una fuente de luz hasta llegar al observador para formar una imagen fue llamado Ray Tracing. En el momento en el que se tuvo el concepto y la idea de realizar este tipo de procesado de las imágenes no era posible debido a su costo computacional (1960). Con el paso del tiempo se ha podido mejorar los algoritmos y además se tiene mayor capacidad de cómputo con lo cual se ha llegado al tratamiento de aspectos cada vez más complejos como lo son los reflejos, las sombras o el efecto que se produce en las imágenes en movimiento (Glassner, 2019).
 
 ### Funcionamiento
@@ -18,7 +19,9 @@ Como ya se había señalado anteriormente, el Ray Tracing se inspira en la físi
 <p align="center">
     <img src="/project/sketches/ray1.png" width="500" />
 </p>
-Sin embargo, este enfoque aunque correcto no es muy práctico, esto debido a la cantidad de rayos de luz o fotones que se encuentran rondado en una imagen o en el mundo real, ademas solo son necesarios para la computación gráfica los rayos que llegan al punto focal, por lo que se cambia el enfoque. Para el ray tracing se parte del punto focal que hace pasar los rayos de luz por cada uno de los puntos del plano de proyección se renderiza la imagen a partir de algunas propiedades que se dan al impactar el rayo contra los objetos que se encuentran en la imagen, entonces el algoritmo se basa en encontrar el punto de intersección más cercano del rayo con el objeto de la imagen y renderizar en el plano de proyección alguna imagen de acuerdo con la distancia de la intersección al punto focal, en donde además se pueden tener en cuenta otros factores como el color o la capacidad de absorber luz que tiene el objeto sobre el cual impacta el rayo (Redmon, 2011). 
+
+Sin embargo, este enfoque aunque correcto no es muy práctico, esto debido a la cantidad de rayos de luz o fotones que se encuentran rondado en una imagen o en el mundo real, ademas solo son necesarios para la computación gráfica los rayos que llegan al punto focal, por lo que se cambia el enfoque. Para el ray tracing se parte del punto focal que hace pasar los rayos de luz por cada uno de los puntos del plano de proyección se renderiza la imagen a partir de algunas propiedades que se dan al impactar el rayo contra los objetos que se encuentran en la imagen, entonces el algoritmo se basa en encontrar el punto de intersección más cercano del rayo con el objeto de la imagen y renderizar en el plano de proyección alguna imagen de acuerdo con la distancia de la intersección al punto focal, en donde además se pueden tener en cuenta otros factores como el color o la capacidad de absorber luz que tiene el objeto sobre el cual impacta el rayo (Redmon, 2011).
+
 <p align="center">
     <img src="/project/sketches/ray2.png" width="500" />
 </p>
@@ -42,7 +45,8 @@ Como se renderizaran esferas, es necesario definir estas de forma matemática, p
 {{< katex display >}}
 <\vec{O} + t \vec{D} - \vec{C} , \vec{O} + t \vec{D} - \vec{C} > = r^2
 {{< /katex >}}
-Al desarrollar estas ecuaciones es posible llegar a que la distancia entre los puntos y el punto focal se puede resolver mediante ecuaciones cuadráticas como se ilustra en la siguiente figura: 
+Al desarrollar estas ecuaciones es posible llegar a que la distancia entre los puntos y el punto focal se puede resolver mediante ecuaciones cuadráticas como se ilustra en la siguiente figura:
+
 <p align="center">
     <img src="/project/sketches/ray3.png" width="300" />
 </p>
@@ -65,6 +69,7 @@ Con todos estos elementos es posible presentar el resultado final en el cual se 
 
 
 ## Conclusiones y trabajo futuro
+
 Se puede apreciar que es posible obtener unos efectos bastante realistas de luz cuando se aplica esta técnica para el renderizado las imágenes, igualmente se observa como aumenta el costo computacional al realizar las operaciones de ray casting lo cual puede llegar a ser un problema grave teniendo en cuenta que no se ha llegado a usar todos los efectos posibles como lo son por ejemplo los efectos de reflección de la luz o el manejo de diferentes figuras geométricas con diferentes materiales que puedan absorber mejor o peor la luz. Para el trabajo futuro se presenta la posibilidad de ampliar el programa incluyendo los efectos anteriormente mencionados pero también otros aún más importantes como lo son las sombras.  
 
 ## Recursos
