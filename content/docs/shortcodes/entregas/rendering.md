@@ -15,7 +15,7 @@ Es el último paso en el proceso de animación. Es el proceso de generar imágen
 - Sombras: el efecto de obstruir la luz.
 - Reflexión: apariencias de espejos.
 - Transparencia u opacidad: transmisión de la luz a través de objetos sólidos.
-- Transparencia: transmisión dispersa de la luz a través de objetos sólidos.
+- Traslucidez: transmisión dispersa de la luz a través de objetos sólidos.
 - Refracción: doblado de la luz asociado con la transparencia.
 - Difracción: doblado, dispersión e interferencia de la luz que pasa a través de un objeto o apertura que interrumpe el haz.
 - Iluminación indirecta: superficies iluminadas por la reflexión de otros objetos.
