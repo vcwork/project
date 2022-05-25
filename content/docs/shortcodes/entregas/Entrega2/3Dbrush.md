@@ -1,4 +1,8 @@
-# Entrega 02 - 3D Brush
+---
+title: Entrega 2 - 3D Brush
+---
+
+# Entrega 2 - 3D Brush
 
 ## Introducción
 

@@ -1,4 +1,8 @@
-# Entrega 01 - Ilusiones ópticas
+---
+title: Entrega 1 - Ilusiones ópticas
+---
+
+# Entrega 1 - Ilusiones ópticas
 
 ## Introducción
 Se presentará el efecto estroboscópico en el cual se parte de imágenes que se presentan de forma continua generando lo que parece ser un movimiento fluido, esto debido al efecto Phi, dentro de los posibles consecuencias que este efecto puede llegar a tener se encuentra una que relaciona el movimiento y la percepción de los colores en las pantallas de los computadores. Al seguir los pasos del trabajo realizado por Michael Bach fue posible reproducir el fenómeno. Para mostrar el trabajo realizado primero se hará una breve contextualización desde la teoría del fenómeno, luego este será reproducido utilizando p5.js y por último se concluirá  acerca de lo hallado.

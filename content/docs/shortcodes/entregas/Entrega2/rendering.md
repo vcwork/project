@@ -1,4 +1,8 @@
-# Entrega 02 - Renderización en software
+---
+title: Entrega 2 - Renderización en software
+---
+
+# Entrega 2 - Renderización en software
 
 ## Renderizado por software
 

@@ -1,4 +1,8 @@
-# Entrega 02
+---
+title: Entrega 2 - Ray Tracing
+---
+
+# Entrega 2 - Ray Tracing
 
 ## Ray tracing
 
