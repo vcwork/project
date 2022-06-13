@@ -1,7 +1,7 @@
 let colorShader;
 let cmy;
 let v1, v2, v3;
-
+let colorr = 255;
 function preload() {
   // The vertex shader defines how vertices are projected onto clip space.
   // Most of the times a projection and modelview matrix are needed for this
@@ -19,7 +19,7 @@ function preload() {
 
 function setup() {
   // shaders require WEBGL mode to work
-  createCanvas(300, 300, WEBGL);
+  createCanvas(600, 450, WEBGL);
   // https://p5js.org/reference/#/p5/shader
   shader(colorShader);
   randomizeTriangle();
@@ -30,11 +30,11 @@ function draw() {
   // the fill command is used to define the colors
   // (to be interpolated) in a per-vertex basis
   beginShape(TRIANGLES);
-  fill('red');
+  fill(colorr);
   vertex(v1.x, v1.y);
-  fill('green');
-  vertex(v2.x, v2.y);
   fill('blue');
+  vertex(v2.x, v2.y);
+  fill('green');
   vertex(v3.x, v3.y);
   endShape();
 }
@@ -55,5 +55,11 @@ function keyPressed() {
   }
   if (key == 'r') {
     randomizeTriangle();
+  }
+}
+function mouseMoved () {
+  colorr = colorr + 2;
+  if (colorr > 280) {
+    colorr = 0;
   }
 }
