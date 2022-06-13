@@ -12,7 +12,7 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(300, 300, WEBGL);
+  createCanvas(600, 450, WEBGL);
   textureMode(NORMAL);
   // use custom shader
   shader(uvShader);

@@ -13,7 +13,7 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(300, 300, WEBGL);
+  createCanvas(600, 450, WEBGL);
   // easycam stuff
   let state = {
     distance: 250,           // scalar
