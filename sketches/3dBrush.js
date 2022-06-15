@@ -108,8 +108,7 @@ function setup() {
   capture.elt.onloadeddata = function(){
     console.log("video initialized");
     videoDataLoaded = true;
-  }
-
+  }  
 
   // easycam stuff
   let state = {
