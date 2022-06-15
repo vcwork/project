@@ -1,5 +1,5 @@
 ---
-title: Entrega 2 - 3D Brush
+title: (1) 3D Brush
 ---
 
 # Entrega 2 - 3D Brush

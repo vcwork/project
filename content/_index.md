@@ -44,3 +44,19 @@ Se continúa en la exploración e implementación de la librería Media Pipe. Se
 ### Miércoles 18 de mayo del 2022
 
 Se continúa en la exploración e implemetación de las librerías Media Pipe y ML5. Se evidencia que la librería Media Pipe puede causar que la cámara del dispositivo falle de manera aleatorio, por lo que se analiza cambiar el punto que se está desarrollando.
+
+### Lunes 6 de junio del 2022
+
+Se inicia a trabajar en la entrega tratando de ejecutar en local los códigos de *Programming paradigm* y *Coloring*. Se les realizan algunas modificaciones menores y se observa su comportamiento para comprender mejor su estructura.
+
+### Miércoles 8 de junio del 2022
+
+Ahora se copian y ejecutan localmente los códigos de *Coloring* y *Texturing*, explorando cómo las modificaciones en algunos parámetros cambian el comportamiento del programa. Por primera vez se evidencia un error en la compilación de GitHub pages que impide el despliegue de la página, por lo que paralelamente se inicia a trabajar en la solución de este error.
+
+### Lunes 13 de junio del 2022
+
+Se explora el código de *luma* ejecutándolo en local y cambiando algunos de sus parámetros, con el fin comprender su funcionamiento. Por otro lado, se sigue trabajando en solucionar el error de despliegue y, por sugerencia del profesor, se tratará de eliminar las vistas y el código innecesario dentro de la plantilla de Showcase.
+
+### Miércoles 15 de junio del 2022
+
+

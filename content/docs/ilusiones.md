@@ -1,5 +1,5 @@
 ---
-title: Entrega 1 - Ilusiones ópticas
+title: Entrega 1
 ---
 
 # Entrega 1 - Ilusiones ópticas

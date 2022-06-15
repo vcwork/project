@@ -1,5 +1,5 @@
 ---
-title: Entrega 2 - Ray Tracing
+title: (2) Ray Tracing
 ---
 
 # Entrega 2 - Ray Tracing

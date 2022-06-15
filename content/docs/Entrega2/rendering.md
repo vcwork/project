@@ -1,5 +1,5 @@
 ---
-title: Entrega 2 - Renderización en software
+title: (3) Renderización en software
 ---
 
 # Entrega 2 - Renderización en software
