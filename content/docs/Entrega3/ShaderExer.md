@@ -25,3 +25,4 @@ title: (1) Óscar
 {{< p5-iframe sketch="/project/sketches/luma.js" lib1="https://cdn.jsdelivr.net/gh/VisualComputing/p5.treegl/p5.treegl.js" width="625" height="475">}}
 {{< p5-iframe sketch="/project/sketches/luma1.js" lib1="https://cdn.jsdelivr.net/gh/VisualComputing/p5.treegl/p5.treegl.js" width="625" height="475">}}
 {{< p5-iframe sketch="/project/sketches/luma2.js" lib1="https://cdn.jsdelivr.net/gh/VisualComputing/p5.treegl/p5.treegl.js" width="625" height="475">}}
+{{< p5-iframe sketch="/project/sketches/mixing.js" lib1="https://cdn.jsdelivr.net/gh/VisualComputing/p5.treegl/p5.treegl.js" width="625" height="475">}}
