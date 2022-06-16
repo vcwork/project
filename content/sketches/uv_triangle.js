@@ -24,5 +24,5 @@ function draw() {
   // https://p5js.org/reference/#/p5/quad
   // It's worth noting (not mentioned in the api docs) that the quad
   // command also adds the texture coordinates to each of its vertices.
-  triangle(1,-1, 1,1, -1,1);
+  polygon(1,-1, 70, 7);
 }
