@@ -1,8 +1,12 @@
 ---
-title: (2) Pruebas Gerson
+title: (2) Gerson Nicolás Pineda
 ---
 
-# Entrega Entrega 3 - Shaders
+# Entrega 3 - Shaders
+
+## Renderización por rasterización
+
+### Aplicaciones
 
 ## Coloring
 
