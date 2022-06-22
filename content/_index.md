@@ -59,6 +59,8 @@ Se explora el código de *luma* ejecutándolo en local y cambiando algunos de su
 
 ### Miércoles 15 de junio del 2022
 
-Se soluciona el problema de despliegue de la página revisando el historial del repositorio y tratando se eliminar los cambios introducidos en ese commit sin modificar los cambios introducidos actualmente. Continuando con las implementaciones, ahora se trabaja en cambiar la geometría del espacio con el fin de completar uno de los ejercicios propuestos. El problema fue resuelto al eliminar algunos saltos de línea en un código de una de las animaciones.
+Se soluciona el problema de despliegue de la página revisando el historial del repositorio y tratando se eliminar los cambios introducidos en ese commit sin modificar los cambios introducidos actualmente. Continuando con las implementaciones, ahora se trabaja en cambiar la geometría del espacio con el fin de completar uno de los ejercicios propuestos.
 
 ### Miércoles 22 de junio del 2022
+
+Se trabaja en variaciones de los códigos ya creados, modificando algunos parámetros y estudiando su comportamiento. Se trabaja individualmente en el desarrollo de diferentes ejercicios para alcanzar satisfactoriamente la meta del taller.
