@@ -63,4 +63,27 @@ En este caso es:
 
 ## Conclusiones y trabajo futuro
 
-sssssssss
+Luego de realizar los ejercicios propuestos me he podido dar cuenta que en la parte de generación de color en un shape las matemáticas son esenciales para la interpolación de estos ya que estos generan que se sepan nuevos datos desconocidos entre un conjunto de datos discretos.
+
+También el mapeo de texturas en un espacio definido se puede mostrar de muchas maneras ya que este se mapeará dentro de la superficie del shape, en este caso usando shaders, pero de una manera inusual, en este caso con números, algo que podría ser confuso y esto se hace con los colores en formato vec3 o vec4, en el caso de vec3 con 3 parámetros que podrían ser los RGB o con vec4 con 4 parámetros. Y mejor aún, esto se podría combinar con el mundo 3D y brindar una conciencia espacial, algo muy interesante para estudiar mas afondo en el futuro ya que se podría trabajar con diferentes formas en el espacio y jugar con ellas.
+
+Es interesante la gran variedad de aplicaciones que tendrían los shaders en cualquier campo de lo visual, y es emocionante poder seguir investigando sobre esto, ya que invita a practicar y aprender con las matemáticas y la computación.
+
+
+## Bibliografia
+
+[1] Glawion, A. (2022, 12 abril). CPU vs. GPU Rendering – What’s the difference and which should you choose? CG Director. Recuperado 22 de mayo de 2022, de [CPU vs. GPU Rendering – What’s the difference and which should you choose?](https://www.cgdirector.com/cpu-vs-gpu-rendering/#:%7E:text=CPU%20rendering%20is%20a%20technique,benefits%20to%20using%20CPU%20rendering).
+
+[2] Wikipedia contributors. (2022, 18 abril). Rendering (computer graphics). Wikipedia. Recuperado 22 de mayo de 2022, de [Rendering (computer graphics)](https://en.wikipedia.org/wiki/Rendering_(computer_graphics)).
+
+[3] Wikipedia contributors. (2022b, mayo 4). Radiosity (computer graphics). Wikipedia. Recuperado 22 de mayo de 2022, de [Radiosity (computer graphics)](https://en.wikipedia.org/wiki/Radiosity_(computer_graphics)).
+
+[4] Wikipedia contributors. (2022c, mayo 18). Mesa (computer graphics). Wikipedia. Recuperado 22 de mayo de 2022, de [Mesa (computer graphics)](https://en.wikipedia.org/wiki/Mesa_%28computer_graphics%29#Software_renderer).
+
+[5] colaboradores de Wikipedia. (2022, 2 abril). Renderización. Wikipedia, la enciclopedia libre. https://es.wikipedia.org/wiki/Renderizaci%C3%B3n
+
+[6] How to Correctly Interpolate Vertex Attributes on a Parallelogram Using Modern GPUs? (2020). Adam Sawicki. https://asawicki.info news_1721_how_to_correctly_interpolate_vertex_attributes_on_a_parallelogram_using_modern_gpus
+
+[7] Wikipedia contributors. (2022a, mayo 31). 3D user interaction. Wikipedia. https://en.wikipedia.org/wiki/3D_user_interaction#3D_Interaction_Techniques
+
+[8] Wikipedia contributors. (2022b, junio 2). HSL and HSV. Wikipedia. https://en.wikipedia.org/wiki/HSL_and_HSV
