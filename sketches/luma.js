@@ -13,7 +13,7 @@ function setup() {
   noStroke();
   textureMode(NORMAL);
   shader(lumaShader);
-  grey_scale = createCheckbox('luma', false);
+  grey_scale = createCheckbox('HSV ', false);
   grey_scale.position(10, 10);
   grey_scale.style('color', 'white');
   grey_scale.input(() => lumaShader.setUniform('grey_scale', grey_scale.checked()));

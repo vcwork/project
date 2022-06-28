@@ -1,0 +1,313 @@
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="Comparacón en el frameRate entre renderización por software y pr hardware # Esferas hechas por software # Ver Código let canvas; let canvas_context; let canvas_pitch; let canvas_buffer; let viewport_size ; let projection_plane_z; let camera_position; let background_color; let spheres; let lights; let dy; let incre ; let dx; let increx ; let liSliderPInt; let liSliderPX; let liSliderPY; function setup(){ canvas = createCanvas(600,600); //console.log(drawingContext); canvas_buffer = drawingContext.getImageData(0,0,canvas.width, canvas.height); canvas_pitch = canvas.width*4; viewport_size = 1; projection_plane_z = 1; camera_position = [0, 0, 0]; background_color = [255, 255, 255]; dy = 0."><meta name=theme-color content="#FFFFFF"><meta name=color-scheme content="light dark"><meta property="og:title" content="(4) Comparación frame rate, Oscar Gómez 2"><meta property="og:description" content="Comparacón en el frameRate entre renderización por software y pr hardware # Esferas hechas por software # Ver Código let canvas; let canvas_context; let canvas_pitch; let canvas_buffer; let viewport_size ; let projection_plane_z; let camera_position; let background_color; let spheres; let lights; let dy; let incre ; let dx; let increx ; let liSliderPInt; let liSliderPX; let liSliderPY; function setup(){ canvas = createCanvas(600,600); //console.log(drawingContext); canvas_buffer = drawingContext.getImageData(0,0,canvas.width, canvas.height); canvas_pitch = canvas.width*4; viewport_size = 1; projection_plane_z = 1; camera_position = [0, 0, 0]; background_color = [255, 255, 255]; dy = 0."><meta property="og:type" content="article"><meta property="og:url" content="https://vcwork.github.io/project/docs/Entrega3/comparacion/"><meta property="article:section" content="docs"><meta property="article:modified_time" content="2022-06-28T01:29:20-05:00"><title>(4) Comparación frame rate, Oscar Gómez 2 | Showcase Template</title><link rel=manifest href=/project/manifest.json><link rel=icon href=/project/favicon.png type=image/x-icon><link rel=stylesheet href=/project/book.min.ab46de3e725a6415339a37bba23a0067534a37289b063c9f8d011515a63097a8.css integrity="sha256-q0bePnJaZBUzmje7ojoAZ1NKNyibBjyfjQEVFaYwl6g=" crossorigin=anonymous><script defer src=/project/flexsearch.min.js></script>
+<script defer src=/project/en.search.min.aeedd4d18cfed964fd15fd4c3d836235a2ce38359ab7cab7a34f0c590caa37d5.js integrity="sha256-ru3U0Yz+2WT9Ff1MPYNiNaLOODWat8q3o08MWQyqN9U=" crossorigin=anonymous></script></head><body dir=ltr><input type=checkbox class="hidden toggle" id=menu-control>
+<input type=checkbox class="hidden toggle" id=toc-control><main class="container flex"><aside class=book-menu><div class=book-menu-content><nav><h2 class=book-brand><a class="flex align-center" href=/project/><span>Showcase Template</span></a></h2><div class=book-search><input type=text id=book-search-input placeholder=Search aria-label=Search maxlength=64 data-hotkeys=s/><div class="book-search-spinner hidden"></div><ul id=book-search-results></ul></div><ul><li><a href=/project/docs/ilusiones/>Entrega 1</a></li><li><input type=checkbox id=section-1c2a9454c2f3625c9b60a69e31250130 class=toggle>
+<label for=section-1c2a9454c2f3625c9b60a69e31250130 class="flex justify-between"><a role=button>Entrega 2</a></label><ul><li><a href=/project/docs/Entrega2/3Dbrush/>(1) 3D Brush</a></li><li><a href=/project/docs/Entrega2/Ray-Tracing/>(2) Ray Tracing</a></li><li><a href=/project/docs/Entrega2/rendering/>(3) Renderización en software</a></li></ul></li><li><input type=checkbox id=section-394698d7d249dcdae2cc71d29618744e class=toggle checked>
+<label for=section-394698d7d249dcdae2cc71d29618744e class="flex justify-between"><a role=button>Entrega 3</a></label><ul><li><a href=/project/docs/Entrega3/ShaderExer/>(1) Óscar Alejandro Gómez</a></li><li><a href=/project/docs/Entrega3/gerson_codes/>(2) Gerson Nicolás Pineda</a></li><li><a href=/project/docs/Entrega3/Fernando/>(3) Fernando Moreno Bautista</a></li><li><a href=/project/docs/Entrega3/comparacion/ class=active>(4) Comparación frame rate, Oscar Gómez 2</a></li><li><a href=/project/docs/Entrega3/parte1/>Parte I</a></li><li><a href=/project/docs/Entrega3/parte2/>Parte II</a></li><li><a href=/project/docs/Entrega3/parte3/>Parte III</a></li></ul></li></ul></nav><script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script></div></aside><div class=book-page><header class=book-header><div class="flex align-center justify-between"><label for=menu-control><img src=/project/svg/menu.svg class=book-icon alt=Menu></label>
+<strong>(4) Comparación frame rate, Oscar Gómez 2</strong>
+<label for=toc-control><img src=/project/svg/toc.svg class=book-icon alt="Table of Contents"></label></div><aside class="hidden clearfix"><nav id=TableOfContents><ul><li><ul><li><a href=#comparacón-en-el-framerate-entre-renderización-por-software-y-pr-hardware>Comparacón en el frameRate entre renderización por software y pr hardware</a><ul><li><a href=#esferas-hechas-por-software>Esferas hechas por software</a></li><li><a href=#esferas-hechas-por-hardware>Esferas hechas por hardware</a></li></ul></li><li><a href=#el-frame-rate-es-un-poco-mas-alto-een-promedio-el-las-esferas-hechas-por-hardare>El frame rate es un poco mas alto een promedio el las esferas hechas por hardare</a></li></ul></li></ul></nav></aside></header><article class=markdown><h2 id=comparacón-en-el-framerate-entre-renderización-por-software-y-pr-hardware>Comparacón en el frameRate entre renderización por software y pr hardware
+<a class=anchor href=#comparac%c3%b3n-en-el-framerate-entre-renderizaci%c3%b3n-por-software-y-pr-hardware>#</a></h2><h3 id=esferas-hechas-por-software>Esferas hechas por software
+<a class=anchor href=#esferas-hechas-por-software>#</a></h3><iframe id=rayTracingtestMultipleFrame style=width:620px;height:625px srcdoc="
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <script src=https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.1/p5.min.js></script>
+            <script src=https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.1/addons/p5.sound.min.js></script>
+            
+            
+            
+            
+            
+            <script src=/project/sketches/rayTracingtestMultipleFrame.js></script>
+          </head>
+          <body>
+          </body>
+        </html>
+      "></iframe>
+<details><summary>Ver Código</summary><div class=markdown-inner><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=display:flex><span><span style=color:#66d9ef>let</span> <span style=color:#a6e22e>canvas</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>let</span> <span style=color:#a6e22e>canvas_context</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>let</span> <span style=color:#a6e22e>canvas_pitch</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>let</span> <span style=color:#a6e22e>canvas_buffer</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>let</span> <span style=color:#a6e22e>viewport_size</span> ;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>let</span> <span style=color:#a6e22e>projection_plane_z</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>let</span> <span style=color:#a6e22e>camera_position</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>let</span> <span style=color:#a6e22e>background_color</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>let</span> <span style=color:#a6e22e>spheres</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>let</span> <span style=color:#a6e22e>lights</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>let</span> <span style=color:#a6e22e>dy</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>let</span> <span style=color:#a6e22e>incre</span> ; 
+</span></span><span style=display:flex><span><span style=color:#66d9ef>let</span> <span style=color:#a6e22e>dx</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>let</span> <span style=color:#a6e22e>increx</span> ; 
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>let</span> <span style=color:#a6e22e>liSliderPInt</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>let</span> <span style=color:#a6e22e>liSliderPX</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>let</span> <span style=color:#a6e22e>liSliderPY</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>function</span> <span style=color:#a6e22e>setup</span>(){
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>canvas</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>createCanvas</span>(<span style=color:#ae81ff>600</span>,<span style=color:#ae81ff>600</span>);
+</span></span><span style=display:flex><span>    <span style=color:#75715e>//console.log(drawingContext);
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#a6e22e>canvas_buffer</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>drawingContext</span>.<span style=color:#a6e22e>getImageData</span>(<span style=color:#ae81ff>0</span>,<span style=color:#ae81ff>0</span>,<span style=color:#a6e22e>canvas</span>.<span style=color:#a6e22e>width</span>, <span style=color:#a6e22e>canvas</span>.<span style=color:#a6e22e>height</span>);
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>canvas_pitch</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>canvas</span>.<span style=color:#a6e22e>width</span><span style=color:#f92672>*</span><span style=color:#ae81ff>4</span>;
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>viewport_size</span> <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>;
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>projection_plane_z</span> <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>;
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>camera_position</span> <span style=color:#f92672>=</span> [<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>];
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>background_color</span> <span style=color:#f92672>=</span> [<span style=color:#ae81ff>255</span>, <span style=color:#ae81ff>255</span>, <span style=color:#ae81ff>255</span>];
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>dy</span> <span style=color:#f92672>=</span> <span style=color:#ae81ff>0.2</span>;
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>incre</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>true</span>;
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>dx</span> <span style=color:#f92672>=</span> <span style=color:#f92672>-</span><span style=color:#ae81ff>0.6</span>;
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>increx</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>true</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>liSliderPInt</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>createSlider</span>(<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>0.2</span>, <span style=color:#ae81ff>0.05</span>);
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>liSliderPInt</span>.<span style=color:#a6e22e>position</span>(<span style=color:#ae81ff>10</span>, <span style=color:#ae81ff>10</span>);
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>liSliderPInt</span>.<span style=color:#a6e22e>style</span>(<span style=color:#e6db74>&#39;width&#39;</span>, <span style=color:#e6db74>&#39;580px&#39;</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>liSliderPX</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>createSlider</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>5</span>, <span style=color:#ae81ff>5</span>, <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0.5</span>);
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>liSliderPX</span>.<span style=color:#a6e22e>position</span>(<span style=color:#ae81ff>10</span>, <span style=color:#ae81ff>30</span>);
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>liSliderPX</span>.<span style=color:#a6e22e>style</span>(<span style=color:#e6db74>&#39;width&#39;</span>, <span style=color:#e6db74>&#39;580px&#39;</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>liSliderPY</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>createSlider</span>(<span style=color:#f92672>-</span><span style=color:#ae81ff>5</span>, <span style=color:#ae81ff>5</span>, <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0.5</span>);
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>liSliderPY</span>.<span style=color:#a6e22e>position</span>(<span style=color:#ae81ff>10</span>, <span style=color:#ae81ff>50</span>);
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>liSliderPY</span>.<span style=color:#a6e22e>style</span>(<span style=color:#e6db74>&#39;width&#39;</span>, <span style=color:#e6db74>&#39;580px&#39;</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>spheres</span> <span style=color:#f92672>=</span> [<span style=color:#66d9ef>new</span> <span style=color:#a6e22e>Sphere</span>([<span style=color:#ae81ff>0</span>, <span style=color:#a6e22e>dy</span>, <span style=color:#ae81ff>3</span>], <span style=color:#ae81ff>0.2</span>, [<span style=color:#ae81ff>255</span>, <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>]),
+</span></span><span style=display:flex><span>              <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>Sphere</span>([<span style=color:#a6e22e>dx</span>, <span style=color:#f92672>-</span><span style=color:#ae81ff>0.2</span> , <span style=color:#ae81ff>5</span>], <span style=color:#ae81ff>0.8</span>, [<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>255</span>, <span style=color:#ae81ff>0</span>]),
+</span></span><span style=display:flex><span>              <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>Sphere</span>([<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>7</span>], <span style=color:#ae81ff>2</span>, [<span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>255</span>])];
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>lights</span> <span style=color:#f92672>=</span> [
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>Light</span>(<span style=color:#a6e22e>Light</span>.<span style=color:#a6e22e>AMBIENT</span>,<span style=color:#ae81ff>0.2</span>),
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>Light</span>(<span style=color:#a6e22e>Light</span>.<span style=color:#a6e22e>POINT</span>, <span style=color:#a6e22e>liSliderPInt</span>.<span style=color:#a6e22e>value</span>(), [<span style=color:#a6e22e>liSliderPX</span>.<span style=color:#a6e22e>value</span>(), <span style=color:#ae81ff>1</span>, <span style=color:#ae81ff>0</span>]),
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>Light</span>(<span style=color:#a6e22e>Light</span>.<span style=color:#a6e22e>DIRECTIONAL</span>, <span style=color:#ae81ff>1</span>, [<span style=color:#ae81ff>3</span>, <span style=color:#ae81ff>4</span> , <span style=color:#ae81ff>4</span>])
+</span></span><span style=display:flex><span>        ];
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>function</span> <span style=color:#a6e22e>PutPixel</span>(<span style=color:#a6e22e>x</span>, <span style=color:#a6e22e>y</span>, <span style=color:#a6e22e>color</span>) {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>var</span> <span style=color:#a6e22e>x</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>canvas</span>.<span style=color:#a6e22e>width</span><span style=color:#f92672>/</span><span style=color:#ae81ff>2</span> <span style=color:#f92672>+</span> <span style=color:#a6e22e>x</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>var</span> <span style=color:#a6e22e>y</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>canvas</span>.<span style=color:#a6e22e>height</span><span style=color:#f92672>/</span><span style=color:#ae81ff>2</span> <span style=color:#f92672>-</span> <span style=color:#a6e22e>y</span> <span style=color:#f92672>-</span> <span style=color:#ae81ff>1</span>;
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> (<span style=color:#a6e22e>x</span> <span style=color:#f92672>&lt;</span> <span style=color:#ae81ff>0</span> <span style=color:#f92672>||</span> <span style=color:#a6e22e>x</span> <span style=color:#f92672>&gt;=</span> <span style=color:#a6e22e>canvas</span>.<span style=color:#a6e22e>width</span> <span style=color:#f92672>||</span> <span style=color:#a6e22e>y</span> <span style=color:#f92672>&lt;</span> <span style=color:#ae81ff>0</span> <span style=color:#f92672>||</span> <span style=color:#a6e22e>y</span> <span style=color:#f92672>&gt;=</span> <span style=color:#a6e22e>canvas</span>.<span style=color:#a6e22e>height</span>) {
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>return</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>var</span> <span style=color:#a6e22e>offset</span> <span style=color:#f92672>=</span> <span style=color:#ae81ff>4</span><span style=color:#f92672>*</span><span style=color:#a6e22e>x</span> <span style=color:#f92672>+</span> <span style=color:#a6e22e>canvas_pitch</span><span style=color:#f92672>*</span><span style=color:#a6e22e>y</span>;
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>canvas_buffer</span>.<span style=color:#a6e22e>data</span>[<span style=color:#a6e22e>offset</span><span style=color:#f92672>++</span>] <span style=color:#f92672>=</span> <span style=color:#a6e22e>color</span>[<span style=color:#ae81ff>0</span>];
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>canvas_buffer</span>.<span style=color:#a6e22e>data</span>[<span style=color:#a6e22e>offset</span><span style=color:#f92672>++</span>] <span style=color:#f92672>=</span> <span style=color:#a6e22e>color</span>[<span style=color:#ae81ff>1</span>];
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>canvas_buffer</span>.<span style=color:#a6e22e>data</span>[<span style=color:#a6e22e>offset</span><span style=color:#f92672>++</span>] <span style=color:#f92672>=</span> <span style=color:#a6e22e>color</span>[<span style=color:#ae81ff>2</span>];
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>canvas_buffer</span>.<span style=color:#a6e22e>data</span>[<span style=color:#a6e22e>offset</span><span style=color:#f92672>++</span>] <span style=color:#f92672>=</span> <span style=color:#ae81ff>255</span>; 
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>function</span> <span style=color:#a6e22e>UpdateCanvas</span>() {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>drawingContext</span>.<span style=color:#a6e22e>putImageData</span>(<span style=color:#a6e22e>canvas_buffer</span>, <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>);
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>function</span> <span style=color:#a6e22e>DotProduct</span>(<span style=color:#a6e22e>v1</span>, <span style=color:#a6e22e>v2</span>) {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>v1</span>[<span style=color:#ae81ff>0</span>]<span style=color:#f92672>*</span><span style=color:#a6e22e>v2</span>[<span style=color:#ae81ff>0</span>] <span style=color:#f92672>+</span> <span style=color:#a6e22e>v1</span>[<span style=color:#ae81ff>1</span>]<span style=color:#f92672>*</span><span style=color:#a6e22e>v2</span>[<span style=color:#ae81ff>1</span>] <span style=color:#f92672>+</span> <span style=color:#a6e22e>v1</span>[<span style=color:#ae81ff>2</span>]<span style=color:#f92672>*</span><span style=color:#a6e22e>v2</span>[<span style=color:#ae81ff>2</span>];
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>function</span> <span style=color:#a6e22e>Length</span>(<span style=color:#a6e22e>vec</span>) {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> Math.<span style=color:#a6e22e>sqrt</span>(<span style=color:#a6e22e>DotProduct</span>(<span style=color:#a6e22e>vec</span>, <span style=color:#a6e22e>vec</span>));
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>function</span> <span style=color:#a6e22e>Multiply</span>(<span style=color:#a6e22e>k</span>, <span style=color:#a6e22e>vec</span>) {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> [<span style=color:#a6e22e>k</span><span style=color:#f92672>*</span><span style=color:#a6e22e>vec</span>[<span style=color:#ae81ff>0</span>], <span style=color:#a6e22e>k</span><span style=color:#f92672>*</span><span style=color:#a6e22e>vec</span>[<span style=color:#ae81ff>1</span>], <span style=color:#a6e22e>k</span><span style=color:#f92672>*</span><span style=color:#a6e22e>vec</span>[<span style=color:#ae81ff>2</span>]];
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>function</span> <span style=color:#a6e22e>Add</span>(<span style=color:#a6e22e>v1</span>, <span style=color:#a6e22e>v2</span>) {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> [<span style=color:#a6e22e>v1</span>[<span style=color:#ae81ff>0</span>] <span style=color:#f92672>+</span> <span style=color:#a6e22e>v2</span>[<span style=color:#ae81ff>0</span>], <span style=color:#a6e22e>v1</span>[<span style=color:#ae81ff>1</span>] <span style=color:#f92672>+</span> <span style=color:#a6e22e>v2</span>[<span style=color:#ae81ff>1</span>], <span style=color:#a6e22e>v1</span>[<span style=color:#ae81ff>2</span>] <span style=color:#f92672>+</span> <span style=color:#a6e22e>v2</span>[<span style=color:#ae81ff>2</span>]];
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>function</span> <span style=color:#a6e22e>Subtract</span>(<span style=color:#a6e22e>v1</span>, <span style=color:#a6e22e>v2</span>) {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> [<span style=color:#a6e22e>v1</span>[<span style=color:#ae81ff>0</span>] <span style=color:#f92672>-</span> <span style=color:#a6e22e>v2</span>[<span style=color:#ae81ff>0</span>], <span style=color:#a6e22e>v1</span>[<span style=color:#ae81ff>1</span>] <span style=color:#f92672>-</span> <span style=color:#a6e22e>v2</span>[<span style=color:#ae81ff>1</span>], <span style=color:#a6e22e>v1</span>[<span style=color:#ae81ff>2</span>] <span style=color:#f92672>-</span> <span style=color:#a6e22e>v2</span>[<span style=color:#ae81ff>2</span>]];
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>function</span> <span style=color:#a6e22e>Clamp</span>(<span style=color:#a6e22e>vec</span>) {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> [Math.<span style=color:#a6e22e>min</span>(<span style=color:#ae81ff>255</span>, Math.<span style=color:#a6e22e>max</span>(<span style=color:#ae81ff>0</span>, <span style=color:#a6e22e>vec</span>[<span style=color:#ae81ff>0</span>])),
+</span></span><span style=display:flex><span>        Math.<span style=color:#a6e22e>min</span>(<span style=color:#ae81ff>255</span>, Math.<span style=color:#a6e22e>max</span>(<span style=color:#ae81ff>0</span>, <span style=color:#a6e22e>vec</span>[<span style=color:#ae81ff>1</span>])),
+</span></span><span style=display:flex><span>        Math.<span style=color:#a6e22e>min</span>(<span style=color:#ae81ff>255</span>, Math.<span style=color:#a6e22e>max</span>(<span style=color:#ae81ff>0</span>, <span style=color:#a6e22e>vec</span>[<span style=color:#ae81ff>2</span>]))];
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>function</span> <span style=color:#a6e22e>Sphere</span>(<span style=color:#a6e22e>center</span>, <span style=color:#a6e22e>radius</span>, <span style=color:#a6e22e>color</span>) {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>center</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>center</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>radius</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>radius</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>color</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>color</span>;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>function</span> <span style=color:#a6e22e>Light</span>(<span style=color:#a6e22e>ltype</span>, <span style=color:#a6e22e>intensity</span>, <span style=color:#a6e22e>position</span>) {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>ltype</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>ltype</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>intensity</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>intensity</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>position</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>position</span>;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>Light</span>.<span style=color:#a6e22e>AMBIENT</span> <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>;
+</span></span><span style=display:flex><span><span style=color:#a6e22e>Light</span>.<span style=color:#a6e22e>POINT</span> <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>;
+</span></span><span style=display:flex><span><span style=color:#a6e22e>Light</span>.<span style=color:#a6e22e>DIRECTIONAL</span> <span style=color:#f92672>=</span> <span style=color:#ae81ff>2</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>function</span> <span style=color:#a6e22e>CanvasToViewport</span>(<span style=color:#a6e22e>p2d</span>) {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> [<span style=color:#a6e22e>p2d</span>[<span style=color:#ae81ff>0</span>] <span style=color:#f92672>*</span> <span style=color:#a6e22e>viewport_size</span> <span style=color:#f92672>/</span> <span style=color:#a6e22e>canvas</span>.<span style=color:#a6e22e>width</span>,
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>p2d</span>[<span style=color:#ae81ff>1</span>] <span style=color:#f92672>*</span> <span style=color:#a6e22e>viewport_size</span> <span style=color:#f92672>/</span> <span style=color:#a6e22e>canvas</span>.<span style=color:#a6e22e>height</span>,
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>projection_plane_z</span>];
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>function</span> <span style=color:#a6e22e>IntersectRaySphere</span>(<span style=color:#a6e22e>origin</span>, <span style=color:#a6e22e>direction</span>, <span style=color:#a6e22e>sphere</span>) {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>var</span> <span style=color:#a6e22e>oc</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>Subtract</span>(<span style=color:#a6e22e>origin</span>, <span style=color:#a6e22e>sphere</span>.<span style=color:#a6e22e>center</span>);
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>var</span> <span style=color:#a6e22e>k1</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>DotProduct</span>(<span style=color:#a6e22e>direction</span>, <span style=color:#a6e22e>direction</span>);
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>var</span> <span style=color:#a6e22e>k2</span> <span style=color:#f92672>=</span> <span style=color:#ae81ff>2</span><span style=color:#f92672>*</span><span style=color:#a6e22e>DotProduct</span>(<span style=color:#a6e22e>oc</span>, <span style=color:#a6e22e>direction</span>);
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>var</span> <span style=color:#a6e22e>k3</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>DotProduct</span>(<span style=color:#a6e22e>oc</span>, <span style=color:#a6e22e>oc</span>) <span style=color:#f92672>-</span> <span style=color:#a6e22e>sphere</span>.<span style=color:#a6e22e>radius</span><span style=color:#f92672>*</span><span style=color:#a6e22e>sphere</span>.<span style=color:#a6e22e>radius</span>;
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>var</span> <span style=color:#a6e22e>discriminant</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>k2</span><span style=color:#f92672>*</span><span style=color:#a6e22e>k2</span> <span style=color:#f92672>-</span> <span style=color:#ae81ff>4</span><span style=color:#f92672>*</span><span style=color:#a6e22e>k1</span><span style=color:#f92672>*</span><span style=color:#a6e22e>k3</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> (<span style=color:#a6e22e>discriminant</span> <span style=color:#f92672>&lt;</span> <span style=color:#ae81ff>0</span>) {
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>return</span> [<span style=color:#66d9ef>Infinity</span>, <span style=color:#66d9ef>Infinity</span>];
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>var</span> <span style=color:#a6e22e>t1</span> <span style=color:#f92672>=</span> (<span style=color:#f92672>-</span><span style=color:#a6e22e>k2</span> <span style=color:#f92672>+</span> Math.<span style=color:#a6e22e>sqrt</span>(<span style=color:#a6e22e>discriminant</span>)) <span style=color:#f92672>/</span> (<span style=color:#ae81ff>2</span><span style=color:#f92672>*</span><span style=color:#a6e22e>k1</span>);
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>var</span> <span style=color:#a6e22e>t2</span> <span style=color:#f92672>=</span> (<span style=color:#f92672>-</span><span style=color:#a6e22e>k2</span> <span style=color:#f92672>-</span> Math.<span style=color:#a6e22e>sqrt</span>(<span style=color:#a6e22e>discriminant</span>)) <span style=color:#f92672>/</span> (<span style=color:#ae81ff>2</span><span style=color:#f92672>*</span><span style=color:#a6e22e>k1</span>);
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> [<span style=color:#a6e22e>t1</span>, <span style=color:#a6e22e>t2</span>];
+</span></span><span style=display:flex><span>  }  
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>ComputeLighting</span>(<span style=color:#a6e22e>point</span>, <span style=color:#a6e22e>normal</span>) {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>var</span> <span style=color:#a6e22e>intensity</span> <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>var</span> <span style=color:#a6e22e>length_n</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>Length</span>(<span style=color:#a6e22e>normal</span>);  <span style=color:#75715e>// Should be 1.0, but just in case...
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>  
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>var</span> <span style=color:#a6e22e>i</span> <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>; <span style=color:#a6e22e>i</span> <span style=color:#f92672>&lt;</span> <span style=color:#a6e22e>lights</span>.<span style=color:#a6e22e>length</span>; <span style=color:#a6e22e>i</span><span style=color:#f92672>++</span>) {
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>var</span> <span style=color:#a6e22e>light</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>lights</span>[<span style=color:#a6e22e>i</span>];
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>if</span> (<span style=color:#a6e22e>light</span>.<span style=color:#a6e22e>ltype</span> <span style=color:#f92672>==</span> <span style=color:#a6e22e>Light</span>.<span style=color:#a6e22e>AMBIENT</span>) {
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>intensity</span> <span style=color:#f92672>+=</span> <span style=color:#a6e22e>light</span>.<span style=color:#a6e22e>intensity</span>;
+</span></span><span style=display:flex><span>      } <span style=color:#66d9ef>else</span> {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>var</span> <span style=color:#a6e22e>vec_l</span>;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (<span style=color:#a6e22e>light</span>.<span style=color:#a6e22e>ltype</span> <span style=color:#f92672>==</span> <span style=color:#a6e22e>Light</span>.<span style=color:#a6e22e>POINT</span>) {
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>vec_l</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>Subtract</span>(<span style=color:#a6e22e>light</span>.<span style=color:#a6e22e>position</span>, <span style=color:#a6e22e>point</span>);
+</span></span><span style=display:flex><span>        } <span style=color:#66d9ef>else</span> {  <span style=color:#75715e>// Light.DIRECTIONAL
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>      <span style=color:#a6e22e>vec_l</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>light</span>.<span style=color:#a6e22e>position</span>;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>var</span> <span style=color:#a6e22e>n_dot_l</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>DotProduct</span>(<span style=color:#a6e22e>normal</span>, <span style=color:#a6e22e>vec_l</span>);
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (<span style=color:#a6e22e>n_dot_l</span> <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>0</span>) {
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>intensity</span> <span style=color:#f92672>+=</span> <span style=color:#a6e22e>light</span>.<span style=color:#a6e22e>intensity</span> <span style=color:#f92672>*</span> <span style=color:#a6e22e>n_dot_l</span> <span style=color:#f92672>/</span> (<span style=color:#a6e22e>length_n</span> <span style=color:#f92672>*</span> <span style=color:#a6e22e>Length</span>(<span style=color:#a6e22e>vec_l</span>));
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>      }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>intensity</span>;
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>TraceRay</span>(<span style=color:#a6e22e>origin</span>, <span style=color:#a6e22e>direction</span>, <span style=color:#a6e22e>min_t</span>, <span style=color:#a6e22e>max_t</span>) {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>var</span> <span style=color:#a6e22e>closest_t</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>Infinity</span>;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>var</span> <span style=color:#a6e22e>closest_sphere</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>null</span>;
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>var</span> <span style=color:#a6e22e>i</span> <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>; <span style=color:#a6e22e>i</span> <span style=color:#f92672>&lt;</span> <span style=color:#a6e22e>spheres</span>.<span style=color:#a6e22e>length</span>; <span style=color:#a6e22e>i</span><span style=color:#f92672>++</span>) {
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>var</span> <span style=color:#a6e22e>ts</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>IntersectRaySphere</span>(<span style=color:#a6e22e>origin</span>, <span style=color:#a6e22e>direction</span>, <span style=color:#a6e22e>spheres</span>[<span style=color:#a6e22e>i</span>]);
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>if</span> (<span style=color:#a6e22e>ts</span>[<span style=color:#ae81ff>0</span>] <span style=color:#f92672>&lt;</span> <span style=color:#a6e22e>closest_t</span> <span style=color:#f92672>&amp;&amp;</span> <span style=color:#a6e22e>min_t</span> <span style=color:#f92672>&lt;</span> <span style=color:#a6e22e>ts</span>[<span style=color:#ae81ff>0</span>] <span style=color:#f92672>&amp;&amp;</span> <span style=color:#a6e22e>ts</span>[<span style=color:#ae81ff>0</span>] <span style=color:#f92672>&lt;</span> <span style=color:#a6e22e>max_t</span>) {
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>closest_t</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>ts</span>[<span style=color:#ae81ff>0</span>];
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>closest_sphere</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>spheres</span>[<span style=color:#a6e22e>i</span>];
+</span></span><span style=display:flex><span>      }
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>if</span> (<span style=color:#a6e22e>ts</span>[<span style=color:#ae81ff>1</span>] <span style=color:#f92672>&lt;</span> <span style=color:#a6e22e>closest_t</span> <span style=color:#f92672>&amp;&amp;</span> <span style=color:#a6e22e>min_t</span> <span style=color:#f92672>&lt;</span> <span style=color:#a6e22e>ts</span>[<span style=color:#ae81ff>1</span>] <span style=color:#f92672>&amp;&amp;</span> <span style=color:#a6e22e>ts</span>[<span style=color:#ae81ff>1</span>] <span style=color:#f92672>&lt;</span> <span style=color:#a6e22e>max_t</span>) {
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>closest_t</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>ts</span>[<span style=color:#ae81ff>1</span>];
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>closest_sphere</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>spheres</span>[<span style=color:#a6e22e>i</span>];
+</span></span><span style=display:flex><span>      }
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>if</span> (<span style=color:#a6e22e>closest_sphere</span> <span style=color:#f92672>==</span> <span style=color:#66d9ef>null</span>) {
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>background_color</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>var</span> <span style=color:#a6e22e>point</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>Add</span>(<span style=color:#a6e22e>origin</span>, <span style=color:#a6e22e>Multiply</span>(<span style=color:#a6e22e>closest_t</span>, <span style=color:#a6e22e>direction</span>));
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>var</span> <span style=color:#a6e22e>normal</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>Subtract</span>(<span style=color:#a6e22e>point</span>, <span style=color:#a6e22e>closest_sphere</span>.<span style=color:#a6e22e>center</span>);
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>normal</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>Multiply</span>(<span style=color:#ae81ff>1.0</span> <span style=color:#f92672>/</span> <span style=color:#a6e22e>Length</span>(<span style=color:#a6e22e>normal</span>), <span style=color:#a6e22e>normal</span>);
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>Multiply</span>(<span style=color:#a6e22e>ComputeLighting</span>(<span style=color:#a6e22e>point</span>, <span style=color:#a6e22e>normal</span>), <span style=color:#a6e22e>closest_sphere</span>.<span style=color:#a6e22e>color</span>);
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>function</span> <span style=color:#a6e22e>draw</span>(){
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>var</span> <span style=color:#a6e22e>x</span> <span style=color:#f92672>=</span> <span style=color:#f92672>-</span><span style=color:#a6e22e>canvas</span>.<span style=color:#a6e22e>width</span><span style=color:#f92672>/</span><span style=color:#ae81ff>2</span>; <span style=color:#a6e22e>x</span> <span style=color:#f92672>&lt;</span> <span style=color:#a6e22e>canvas</span>.<span style=color:#a6e22e>width</span><span style=color:#f92672>/</span><span style=color:#ae81ff>2</span>; <span style=color:#a6e22e>x</span><span style=color:#f92672>++</span>) {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> (<span style=color:#66d9ef>var</span> <span style=color:#a6e22e>y</span> <span style=color:#f92672>=</span> <span style=color:#f92672>-</span><span style=color:#a6e22e>canvas</span>.<span style=color:#a6e22e>height</span><span style=color:#f92672>/</span><span style=color:#ae81ff>2</span>; <span style=color:#a6e22e>y</span> <span style=color:#f92672>&lt;</span> <span style=color:#a6e22e>canvas</span>.<span style=color:#a6e22e>height</span><span style=color:#f92672>/</span><span style=color:#ae81ff>2</span>; <span style=color:#a6e22e>y</span><span style=color:#f92672>++</span>) {
+</span></span><span style=display:flex><span>          <span style=color:#66d9ef>var</span> <span style=color:#a6e22e>direction</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>CanvasToViewport</span>([<span style=color:#a6e22e>x</span>, <span style=color:#a6e22e>y</span>])
+</span></span><span style=display:flex><span>          <span style=color:#66d9ef>var</span> <span style=color:#a6e22e>color</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>TraceRay</span>(<span style=color:#a6e22e>camera_position</span>, <span style=color:#a6e22e>direction</span>, <span style=color:#ae81ff>1</span>, <span style=color:#66d9ef>Infinity</span>);
+</span></span><span style=display:flex><span>          <span style=color:#a6e22e>PutPixel</span>(<span style=color:#a6e22e>x</span>, <span style=color:#a6e22e>y</span>, <span style=color:#a6e22e>Clamp</span>(<span style=color:#a6e22e>color</span>));
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>      }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>if</span>(<span style=color:#a6e22e>incre</span>){
+</span></span><span style=display:flex><span>          <span style=color:#a6e22e>dy</span><span style=color:#f92672>+=</span><span style=color:#ae81ff>0.01</span>;
+</span></span><span style=display:flex><span>          <span style=color:#66d9ef>if</span>(<span style=color:#a6e22e>dy</span><span style=color:#f92672>&gt;=</span><span style=color:#ae81ff>1</span>){
+</span></span><span style=display:flex><span>              <span style=color:#a6e22e>incre</span><span style=color:#f92672>=</span><span style=color:#66d9ef>false</span>;
+</span></span><span style=display:flex><span>          }
+</span></span><span style=display:flex><span>      }<span style=color:#66d9ef>else</span>{
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>dy</span><span style=color:#f92672>-=</span><span style=color:#ae81ff>0.01</span>;
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span>(<span style=color:#a6e22e>dy</span><span style=color:#f92672>&lt;=-</span><span style=color:#ae81ff>1</span>){
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>incre</span><span style=color:#f92672>=</span><span style=color:#66d9ef>true</span>;
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>      }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>      <span style=color:#66d9ef>if</span>(<span style=color:#a6e22e>increx</span>){
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>dx</span><span style=color:#f92672>+=</span><span style=color:#ae81ff>0.01</span>;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span>(<span style=color:#a6e22e>dx</span><span style=color:#f92672>&gt;=</span><span style=color:#ae81ff>1</span>){
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>increx</span><span style=color:#f92672>=</span><span style=color:#66d9ef>false</span>;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }<span style=color:#66d9ef>else</span>{
+</span></span><span style=display:flex><span>          <span style=color:#a6e22e>dx</span><span style=color:#f92672>-=</span><span style=color:#ae81ff>0.01</span>;
+</span></span><span style=display:flex><span>          <span style=color:#66d9ef>if</span>(<span style=color:#a6e22e>dx</span><span style=color:#f92672>&lt;=-</span><span style=color:#ae81ff>1</span>){
+</span></span><span style=display:flex><span>              <span style=color:#a6e22e>increx</span><span style=color:#f92672>=</span><span style=color:#66d9ef>true</span>;
+</span></span><span style=display:flex><span>          }
+</span></span><span style=display:flex><span>    }       
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>spheres</span>[<span style=color:#ae81ff>0</span>].<span style=color:#a6e22e>center</span>[<span style=color:#ae81ff>1</span>] <span style=color:#f92672>=</span> <span style=color:#a6e22e>dy</span>;
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>lights</span>[<span style=color:#ae81ff>1</span>].<span style=color:#a6e22e>intensity</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>liSliderPInt</span>.<span style=color:#a6e22e>value</span>();
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>lights</span>[<span style=color:#ae81ff>1</span>].<span style=color:#a6e22e>position</span>[<span style=color:#ae81ff>0</span>]<span style=color:#f92672>=</span> <span style=color:#a6e22e>liSliderPX</span>.<span style=color:#a6e22e>value</span>();
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>lights</span>[<span style=color:#ae81ff>1</span>].<span style=color:#a6e22e>position</span>[<span style=color:#ae81ff>1</span>]<span style=color:#f92672>=</span> <span style=color:#a6e22e>liSliderPY</span>.<span style=color:#a6e22e>value</span>();
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>spheres</span>[<span style=color:#ae81ff>1</span>].<span style=color:#a6e22e>center</span>[<span style=color:#ae81ff>0</span>] <span style=color:#f92672>=</span> <span style=color:#a6e22e>dx</span>;
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>UpdateCanvas</span>();
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>fill</span>(<span style=color:#ae81ff>0</span>);
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>text</span>(<span style=color:#e6db74>&#34;Frames:  &#34;</span>, <span style=color:#ae81ff>10</span>, <span style=color:#ae81ff>500</span>);
+</span></span><span style=display:flex><span>      <span style=color:#a6e22e>text</span>(<span style=color:#a6e22e>getFrameRate</span>(), <span style=color:#ae81ff>80</span>, <span style=color:#ae81ff>500</span>);
+</span></span><span style=display:flex><span>};
+</span></span></code></pre></div></div></details><h3 id=esferas-hechas-por-hardware>Esferas hechas por hardware
+<a class=anchor href=#esferas-hechas-por-hardware>#</a></h3><p><iframe id=esferas style=width:625px;height:475px srcdoc="
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <script src=https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.1/p5.min.js></script>
+            <script src=https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.1/addons/p5.sound.min.js></script>
+             <script src=https://cdn.jsdelivr.net/gh/VisualComputing/p5.treegl/p5.treegl.js></script> 
+            
+            
+            
+            
+            <script src=/project/sketches/esferas.js></script>
+          </head>
+          <body>
+          </body>
+        </html>
+      "></iframe>
+<details><summary>Ver Código</summary><div class=markdown-inner><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=display:flex><span><span style=color:#66d9ef>function</span> <span style=color:#a6e22e>setup</span>() {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>textSize</span>(<span style=color:#ae81ff>80</span>);
+</span></span><span style=display:flex><span>  <span style=color:#a6e22e>textAlign</span>(<span style=color:#a6e22e>CENTER</span>, <span style=color:#a6e22e>CENTER</span>);
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>createCanvas</span>(<span style=color:#ae81ff>600</span>, <span style=color:#ae81ff>500</span>, <span style=color:#a6e22e>WEBGL</span>);
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>  }
+</span></span><span style=display:flex><span>  
+</span></span><span style=display:flex><span>  <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>draw</span>() {
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>background</span>(<span style=color:#ae81ff>0</span>);
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>ambientLight</span>(<span style=color:#ae81ff>200</span>); 
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>ambientMaterial</span>(<span style=color:#ae81ff>255</span>, <span style=color:#ae81ff>102</span>, <span style=color:#ae81ff>94</span>);
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>directionalLight</span>(<span style=color:#ae81ff>250</span>, <span style=color:#ae81ff>250</span>, <span style=color:#ae81ff>250</span>, <span style=color:#ae81ff>35</span>, <span style=color:#ae81ff>184</span>, <span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>);
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>directionalLight</span>(<span style=color:#ae81ff>135</span>, <span style=color:#ae81ff>64</span>, <span style=color:#ae81ff>134</span>, <span style=color:#a6e22e>frameCount</span><span style=color:#f92672>%</span><span style=color:#ae81ff>100</span>, <span style=color:#a6e22e>frameCount</span><span style=color:#f92672>%</span><span style=color:#ae81ff>100</span>, <span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>);
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>fill</span>(<span style=color:#ae81ff>0</span>,<span style=color:#ae81ff>0</span>,<span style=color:#ae81ff>255</span>);
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>noStroke</span>();
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>translate</span>(<span style=color:#a6e22e>frameCount</span><span style=color:#f92672>%</span><span style=color:#ae81ff>200</span><span style=color:#f92672>*</span> <span style=color:#ae81ff>2</span>, <span style=color:#ae81ff>0</span>, <span style=color:#ae81ff>0</span>);
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>sphere</span>(<span style=color:#ae81ff>60</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>fill</span>(<span style=color:#ae81ff>0</span>,<span style=color:#ae81ff>255</span>,<span style=color:#ae81ff>0</span>);
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>noStroke</span>();
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>translate</span>(<span style=color:#a6e22e>frameCount</span><span style=color:#f92672>%</span><span style=color:#ae81ff>150</span>, <span style=color:#ae81ff>0</span>, <span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>);
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>sphere</span>(<span style=color:#ae81ff>80</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>fill</span>(<span style=color:#ae81ff>255</span>,<span style=color:#ae81ff>0</span>,<span style=color:#ae81ff>0</span>);
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>noStroke</span>();
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>translate</span>(<span style=color:#a6e22e>frameCount</span><span style=color:#f92672>%</span><span style=color:#ae81ff>300</span> <span style=color:#f92672>*</span> <span style=color:#ae81ff>9</span>, <span style=color:#ae81ff>0</span>, <span style=color:#f92672>-</span><span style=color:#ae81ff>100</span>);
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>sphere</span>(<span style=color:#ae81ff>40</span>);
+</span></span><span style=display:flex><span> 
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>console</span>.<span style=color:#a6e22e>log</span>(<span style=color:#a6e22e>getFrameRate</span>());
+</span></span><span style=display:flex><span>  }
+</span></span></code></pre></div></div></details></p><h2 id=el-frame-rate-es-un-poco-mas-alto-een-promedio-el-las-esferas-hechas-por-hardare>El frame rate es un poco mas alto een promedio el las esferas hechas por hardare
+<a class=anchor href=#el-frame-rate-es-un-poco-mas-alto-een-promedio-el-las-esferas-hechas-por-hardare>#</a></h2></article><footer class=book-footer><div class="flex flex-wrap justify-between"><div><a class="flex align-center" href=https://vcwork.github.io/project/commit/b14215af3beaf1abe424aadcec30491e4f2e76f1 title='Last modified by Oscar Alejandro Gómez Suarez | June 28, 2022' target=_blank rel=noopener><img src=/project/svg/calendar.svg class=book-icon alt=Calendar>
+<span>June 28, 2022</span></a></div></div><script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script></footer><div class=book-comments></div><label for=menu-control class="hidden book-menu-overlay"></label></div><aside class=book-toc><div class=book-toc-content><nav id=TableOfContents><ul><li><ul><li><a href=#comparacón-en-el-framerate-entre-renderización-por-software-y-pr-hardware>Comparacón en el frameRate entre renderización por software y pr hardware</a><ul><li><a href=#esferas-hechas-por-software>Esferas hechas por software</a></li><li><a href=#esferas-hechas-por-hardware>Esferas hechas por hardware</a></li></ul></li><li><a href=#el-frame-rate-es-un-poco-mas-alto-een-promedio-el-las-esferas-hechas-por-hardare>El frame rate es un poco mas alto een promedio el las esferas hechas por hardare</a></li></ul></li></ul></nav></div></aside></main></body></html>

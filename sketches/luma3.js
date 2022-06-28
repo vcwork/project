@@ -3,7 +3,7 @@ let img;
 let grey_scale;
 
 function preload() {
-  lumaShader = readShader('/project/sketches/shaders/luma1.frag', { varyings: Tree.texcoords2 });
+  lumaShader = readShader('/project/sketches/shaders/luma3.frag', { varyings: Tree.texcoords2 });
   // image source: https://en.wikipedia.org/wiki/HSL_and_HSV#/media/File:Fire_breathing_2_Luc_Viatour.jpg
   img = loadImage('/project/sketches/fire.jpg');
 }
@@ -13,7 +13,7 @@ function setup() {
   noStroke();
   textureMode(NORMAL);
   shader(lumaShader);
-  grey_scale = createCheckbox('HSL biexcone - Average(M,m)', false);
+  grey_scale = createCheckbox('Arimetic Mean', false);
   grey_scale.position(10, 10);
   grey_scale.style('color', 'white');
   grey_scale.input(() => lumaShader.setUniform('grey_scale', grey_scale.checked()));
