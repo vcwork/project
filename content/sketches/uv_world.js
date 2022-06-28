@@ -16,6 +16,7 @@ function setup() {
   textureMode(NORMAL);
   // use custom shader
   shader(uvShader);
+  console.log(Tree.pmvMatrix);
 }
 
 function draw() {
@@ -25,7 +26,11 @@ function draw() {
   push();
   noStroke();
   // world-space quad (i.e., p5 world space definition: https://shorturl.at/dhCK2)
-  quad(-width / 2, -height / 2, width / 2, -height / 2, width / 2, height / 2, -width / 2, height / 2);
+  beginShape(TRIANGLES);
+  vertex(30, 75);
+  vertex(40, 20);
+  vertex(50, 75);
+  endShape();
   pop();
 }
 
