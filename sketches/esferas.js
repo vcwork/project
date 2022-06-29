@@ -27,5 +27,5 @@ function setup() {
     translate(frameCount%300 * 9, 0, -100);
     sphere(40);
  
-    console.log(getFrameRate());
+    console.log("Soy el framerate de hardware: ", getFrameRate());
   }
