@@ -4,35 +4,295 @@ title: Parte III
 
 # Entrega 3 - Parte III
 
-### WebGL *Lighting* y *Material*
+### Comparación del framerate entre renderización por software y por hardware
 
-#### Lighting
+#### Procesamiento por software
 
-La idea de la ecuación de iluminación es calcular el color de un punto en una superficie. Como parámetros recibe las propiedades del material de la superficie y las propiedades de la fuente de luz que ilumina la superficie. Así mismo, el ángulo en que incide la luz también resulta importante, pero este puede ser calculado a partir de la dirección en la que está la fuente de luz y del vector normal de la superficie. El ángulo del observador y el ángulo del haz de luz refractado también juegan un papel clave. [4]
+{{< details title="Ver código" open=false >}}
+```js
+let canvas;
+let canvas_context;
+let canvas_pitch;
+let canvas_buffer;
 
-![Vectores implicados en la ecuación de iluminación](/project/sketches/webgl_lighting.png)
+let viewport_size ;
+let projection_plane_z;
+let camera_position;
+let background_color;
+let spheres;
+let lights;
+let dy;
+let incre ; 
+let dx;
+let increx ; 
 
-Esta ecuación también tiene en cuenta los colores de ambiente y emisión, pero estos no dependen de los vectores de dirección mostrados en la anterior imagen. [4]
+let liSliderPInt;
+let liSliderPX;
+let liSliderPY;
 
-#### *Material*
+function setup(){
+    canvas = createCanvas(600,600);
+    //console.log(drawingContext);
+    canvas_buffer = drawingContext.getImageData(0,0,canvas.width, canvas.height);
+    canvas_pitch = canvas.width*4;
+    viewport_size = 1;
+    projection_plane_z = 1;
+    camera_position = [0, 0, 0];
+    background_color = [255, 255, 255];
+    dy = 0.2;
+    incre = true;
+    dx = -0.6;
+    increx = true;
 
-Mediante esta propiedad es posible asignar características a las superficies con base en parámetros como el color, textura, transparencia y reflectividad, que a su vez se relacionan con otras propiedades de la iluminación como la reflexión ambiente, que determina el color de un material bajo iluminación ambiental, reflexión difusa, que determina el color de un objeto bajo iluminación directa, o la reflexión especular, que determina el color de un objeto al reflejar fuentes de luz. [5]
+    liSliderPInt = createSlider(0, 1, 0.2, 0.05);
+    liSliderPInt.position(10, 10);
+    liSliderPInt.style('width', '580px');
 
-#### *Phong shaders*
+    liSliderPX = createSlider(-5, 5, 0, 0.5);
+    liSliderPX.position(10, 30);
+    liSliderPX.style('width', '580px');
 
-En algunos casos, cuando la fuente de luz está demasiado cerca a la primitiva (en comparación con el tamaño de la primitiva) los ángulos se vuelven demasiado pequeños, lo que causa que, debido a que la iluminación depende fuertemente de los ángulos, no se obtenga un buen resultado. Para mejorar los resultados los cálculos son trasladados de los *vertex shaders* a los *fragment shaders* por medio de variables *varying* en lo que se conoce como sombreado Phong, que consiste en interpolar vectores normales para calcular la iluminación de cada píxel. [4]
+    liSliderPY = createSlider(-5, 5, 0, 0.5);
+    liSliderPY.position(10, 50);
+    liSliderPY.style('width', '580px');
 
-#### *Diffuse*
+    spheres = [new Sphere([0, dy, 3], 0.2, [255, 0, 0]),
+              new Sphere([dx, -0.2 , 5], 0.8, [0, 255, 0]),
+              new Sphere([0, 0, 7], 2, [0, 0, 255])];
 
-Es una luz que choca contra un objeto y se refracta en todas las direcciones. La cantidad de luz está determinada por el ángulo entre el haz de luz y el vector normal de la superficie. [6]
+    lights = [
+        new Light(Light.AMBIENT,0.2),
+        new Light(Light.POINT, liSliderPInt.value(), [liSliderPX.value(), 1, 0]),
+        new Light(Light.DIRECTIONAL, 1, [3, 4 , 4])
+        ];
+}
 
-Para realizar los cálculos, cada vértice que define un triángulo debe tener asociado un vector normal, los cuales se usan para aplicar la ley del coseno de Lambert. Los efectos de difusión se pueden observar (acá)[http://learnwebgl.brown37.net/09_lights/light_position/light_position.html]. [6]
+function PutPixel(x, y, color) {
+    var x = canvas.width/2 + x;
+    var y = canvas.height/2 - y - 1;
+  
+    if (x < 0 || x >= canvas.width || y < 0 || y >= canvas.height) {
+      return;
+    }
+    var offset = 4*x + canvas_pitch*y;
+    canvas_buffer.data[offset++] = color[0];
+    canvas_buffer.data[offset++] = color[1];
+    canvas_buffer.data[offset++] = color[2];
+    canvas_buffer.data[offset++] = 255; 
+}
 
-![Cálculo de la difusión de la luz](/project/sketches/webgl_diffuse_light.png)
+function UpdateCanvas() {
+    drawingContext.putImageData(canvas_buffer, 0, 0);
+}
 
-#### *Spotlights*
+function DotProduct(v1, v2) {
+    return v1[0]*v2[0] + v1[1]*v2[1] + v1[2]*v2[2];
+}
 
-Son fuentes de luz que no emiten luz en todas las direcciones sino en un cono. Es posible encontrarlas en *three.js*, pero estaban disponibles en *OpenGL* desde la versión 1.1. El vértice del cono se ubica en la posición de la luz y el cono apunta en alguna dirección, llamada la dirección del punto (*Spot direction*). Esta dirección se especifica como un vector. El tamaño del cono se especifica por un ángulo de corte (*cutoff angle*) y la luz de este solo es emitida en las direcciones en las cuales la dirección del punto es menor al ángulo de corte. Allí, la intensidad del haz de luz puede reducirse a medida que aumenta el ángulo entre el haz y la dirección de punto. [4] El comportamiento de este tipo de fuente de luz puede ser observado [acá](https://math.hws.edu/eck/cs424/graphicsbook2018/demos/c7/spotlight-demo.html).
+function Length(vec) {
+    return Math.sqrt(DotProduct(vec, vec));
+}
+
+function Multiply(k, vec) {
+    return [k*vec[0], k*vec[1], k*vec[2]];
+}
+
+function Add(v1, v2) {
+    return [v1[0] + v2[0], v1[1] + v2[1], v1[2] + v2[2]];
+}
+
+function Subtract(v1, v2) {
+    return [v1[0] - v2[0], v1[1] - v2[1], v1[2] - v2[2]];
+}
+
+function Clamp(vec) {
+    return [Math.min(255, Math.max(0, vec[0])),
+        Math.min(255, Math.max(0, vec[1])),
+        Math.min(255, Math.max(0, vec[2]))];
+}
+
+function Sphere(center, radius, color) {
+    this.center = center;
+    this.radius = radius;
+    this.color = color;
+}
+
+function Light(ltype, intensity, position) {
+    this.ltype = ltype;
+    this.intensity = intensity;
+    this.position = position;
+}
+
+Light.AMBIENT = 0;
+Light.POINT = 1;
+Light.DIRECTIONAL = 2;
+
+function CanvasToViewport(p2d) {
+    return [p2d[0] * viewport_size / canvas.width,
+        p2d[1] * viewport_size / canvas.height,
+        projection_plane_z];
+}
+
+function IntersectRaySphere(origin, direction, sphere) {
+    var oc = Subtract(origin, sphere.center);
+  
+    var k1 = DotProduct(direction, direction);
+    var k2 = 2*DotProduct(oc, direction);
+    var k3 = DotProduct(oc, oc) - sphere.radius*sphere.radius;
+  
+    var discriminant = k2*k2 - 4*k1*k3;
+    if (discriminant < 0) {
+      return [Infinity, Infinity];
+    }
+  
+    var t1 = (-k2 + Math.sqrt(discriminant)) / (2*k1);
+    var t2 = (-k2 - Math.sqrt(discriminant)) / (2*k1);
+    return [t1, t2];
+  }  
+
+  function ComputeLighting(point, normal) {
+    var intensity = 0;
+    var length_n = Length(normal);  // Should be 1.0, but just in case...
+  
+    for (var i = 0; i < lights.length; i++) {
+      var light = lights[i];
+      if (light.ltype == Light.AMBIENT) {
+        intensity += light.intensity;
+      } else {
+        var vec_l;
+        if (light.ltype == Light.POINT) {
+      vec_l = Subtract(light.position, point);
+        } else {  // Light.DIRECTIONAL
+      vec_l = light.position;
+        }
+  
+        var n_dot_l = DotProduct(normal, vec_l);
+        if (n_dot_l > 0) {
+      intensity += light.intensity * n_dot_l / (length_n * Length(vec_l));
+        }
+      }
+    }
+  
+    return intensity;
+  }
+
+  function TraceRay(origin, direction, min_t, max_t) {
+    var closest_t = Infinity;
+    var closest_sphere = null;
+  
+    for (var i = 0; i < spheres.length; i++) {
+      var ts = IntersectRaySphere(origin, direction, spheres[i]);
+      if (ts[0] < closest_t && min_t < ts[0] && ts[0] < max_t) {
+        closest_t = ts[0];
+        closest_sphere = spheres[i];
+      }
+      if (ts[1] < closest_t && min_t < ts[1] && ts[1] < max_t) {
+        closest_t = ts[1];
+        closest_sphere = spheres[i];
+      }
+    }
+  
+    if (closest_sphere == null) {
+      return background_color;
+    }
+  
+    var point = Add(origin, Multiply(closest_t, direction));
+    var normal = Subtract(point, closest_sphere.center);
+    normal = Multiply(1.0 / Length(normal), normal);
+  
+    return Multiply(ComputeLighting(point, normal), closest_sphere.color);
+  }
+
+function draw(){
+    for (var x = -canvas.width/2; x < canvas.width/2; x++) {
+        for (var y = -canvas.height/2; y < canvas.height/2; y++) {
+          var direction = CanvasToViewport([x, y])
+          var color = TraceRay(camera_position, direction, 1, Infinity);
+          PutPixel(x, y, Clamp(color));
+        }
+      }
+
+      if(incre){
+          dy+=0.01;
+          if(dy>=1){
+              incre=false;
+          }
+      }else{
+            dy-=0.01;
+            if(dy<=-1){
+                incre=true;
+            }
+      }
+
+      if(increx){
+        dx+=0.01;
+        if(dx>=1){
+            increx=false;
+        }
+    }else{
+          dx-=0.01;
+          if(dx<=-1){
+              increx=true;
+          }
+    }       
+
+      spheres[0].center[1] = dy;
+      lights[1].intensity = liSliderPInt.value();
+      lights[1].position[0]= liSliderPX.value();
+      lights[1].position[1]= liSliderPY.value();
+      spheres[1].center[0] = dx;
+      UpdateCanvas();
+      fill(0);
+      text("Frames:  ", 10, 500);
+      text(getFrameRate(), 80, 500);
+};
+```
+{{< /details >}}
+
+{{< p5-iframe sketch="/project/sketches/rayTracingtestMultipleFrame.js"  width="620" height="625" >}}
+
+#### Procesamiento por hardware
+
+No fue posible colocar texto dentro de la animación debido al uso de WebGL, por lo que debe ser consultado en la consola (mediante la tecla F12 en navegadores basados en Chromium).
+
+{{< details title="Ver código" open=false >}}
+```js
+function setup() {
+    textSize(80);
+    textAlign(CENTER, CENTER);
+    createCanvas(600, 500, WEBGL);    
+  }
+  
+  function draw() {
+    background(0);
+    ambientLight(200); 
+    ambientMaterial(255, 102, 94);
+    
+    directionalLight(250, 250, 250, 35, 184, -1);
+    directionalLight(135, 64, 134, frameCount%100, frameCount%100, -1);
+    fill(0,0,255);
+    noStroke();
+    translate(frameCount%200* 2, 0, 0);
+    sphere(60);
+
+    fill(0,255,0);
+    noStroke();
+    translate(frameCount%150, 0, -1);
+    sphere(80);
+
+    fill(255,0,0);
+    noStroke();
+    translate(frameCount%300 * 9, 0, -100);
+    sphere(40);
+ 
+    console.log(getFrameRate());
+  }
+```
+{{< /details >}}
+
+{{< p5-iframe sketch="/project/sketches/esferas.js" lib1="https://cdn.jsdelivr.net/gh/VisualComputing/p5.treegl/p5.treegl.js" width="625" height="475">}}
+
+**Se evidencia que, en general, el procesamiento por hardware produce un framerate más alto.**
 
 ## Conclusiones y trabajo futuro
 
@@ -41,17 +301,3 @@ La realización de los ejercicios permitió evidenciar la necesidad de aprender 
 Por otra parte, se evidenció que el mapeo de texturas puede ser realizado en la superficie de cualquier *shape* mediante el uso de *shaders* y los colores en formato vec3 y vec4. Para el caso de vec3 sus 3 parámetros pueden ser las componentes RGB del color, mientras que para el caso de vec4 se deben usar 4 parámetros. De esta manera también es posible brindar consciencia espacial, abriendo las puertas para el estudio de la realidad aumentada o la realidad virtual.
 
 Por último, la investigación sobre las funcionalidades *lighting*  y *material* de WebGL resultan ser clave para dar realismo a las imágenes generadas por el computador, teniendo un sinfín de aplicaciones desde el modelado de objetos, hasta la creación de juegos.
-
-## Referencias
-
-[1] Wikipedia contributors. (2022c, junio 24). Interpolation. Wikipedia. Recuperado 25 de junio de 2022, de https://en.wikipedia.org/wiki/Interpolation
-
-[2] Wikipedia contributors. (2022a, abril 22). Texture mapping. Wikipedia. Recuperado 25 de junio de 2022, de https://en.wikipedia.org/wiki/Texture_mapping
-
-[3] Wikipedia contributors. (2022b, junio 2). HSL and HSV. Wikipedia. Recuperado 25 de junio de 2022, de https://en.wikipedia.org/wiki/HSL_and_HSV#HSV
-
-[4] Libretexts. (2020, 7 julio). 7.2: Lighting and Material. Engineering LibreTexts. Recuperado 25 de junio de 2022, de https://eng.libretexts.org/Bookshelves/Computer_Science/Applied_Programming/Book%3A_Introduction_to_Computer_Graphics_(Eck)/07%3A_3D_Graphics_with_WebGL/7.02%3A_Lighting_and_Material
-
-[5] WebGL Materials · Learn · Clara.io. (s. f.). WebGL Materials. Recuperado 25 de junio de 2022, de https://clara.io/learn/user-guide/lighting_shading/materials/material_types/webgl_materials
-
-[6] 9.2 - Diffuse Lighting — LearnWebGL. (s. f.). Diffuse Lighting. Recuperado 25 de junio de 2022, de http://learnwebgl.brown37.net/09_lights/lights_diffuse.html

@@ -6,7 +6,7 @@ title: Parte I
 
 ## Introducción
 
-En este reporte se podrán observar los resultados obtenidos al desarrollar los ejercicios propuestos, todos mediante la aplicación de los conceptos relacionados con los *shaders*. Primero, se observarán los resultados de la implementación de múltiples herramientas de coloreado de luminosidad, para posteriormente ver los resultados de implementar teñido de textura (*texture tinting*).
+En este reporte se podrán observar los resultados obtenidos al desarrollar los ejercicios propuestos, todos mediante la aplicación de los conceptos relacionados con los *shaders*. Se observarán los resultados de la implementación de múltiples herramientas de coloreado de luminosidad, para posteriormente ver los resultados de implementar teñido de textura (*texture tinting*).
 
 Luego, se explorarán los resultados de implementar enmascarado de imágenes/video y otras herramientas de visualización, junto con las herramientas de coloreado de luminosidad.
 
@@ -152,6 +152,12 @@ let easycam;
 let uvShader;
 
 function preload() {
+  // Define geometry in world space (i.e., matrices: Tree.pmvMatrix).
+  // The projection and modelview matrices may be emitted separately
+  // (i.e., matrices: Tree.pMatrix | Tree.mvMatrix), which actually
+  // leads to the same gl_Position result.
+  // Interpolate only texture coordinates (i.e., varyings: Tree.texcoords2).
+  // see: https://github.com/VisualComputing/p5.treegl#handling
   uvShader = readShader('/project/sketches/shaders/uv.frag', { matrices: Tree.pmvMatrix, varyings: Tree.texcoords2 });
 }
 
@@ -160,6 +166,7 @@ function setup() {
   textureMode(NORMAL);
   // use custom shader
   shader(uvShader);
+  console.log(Tree.pmvMatrix);
 }
 
 function draw() {
@@ -168,7 +175,12 @@ function draw() {
   axes();
   push();
   noStroke();
-  quad(-width / 2, -height / 2, width / 2, -height / 2, width / 2, height / 2, -width / 2, height / 2);
+  // world-space quad (i.e., p5 world space definition: https://shorturl.at/dhCK2)
+  beginShape(TRIANGLES);
+  vertex(30, 75);
+  vertex(40, 20);
+  vertex(50, 75);
+  endShape();
   pop();
 }
 
@@ -322,3 +334,32 @@ function draw() {
 {{< /details >}}
 
 {{< p5-iframe sketch="/project/sketches/lumaf2.js" lib1="https://cdn.jsdelivr.net/gh/VisualComputing/p5.treegl/p5.treegl.js" width="625" height="475">}}
+
+Por último, se implementó otra técnica de coloreado por iluminación mediante el promedio aritmético.
+
+{{< details title="Ver Código" open=false >}}
+```js
+precision mediump float;
+
+// uniforms are defined and sent by the sketch
+uniform bool grey_scale;
+uniform sampler2D texture;
+
+// interpolated texcoord (same name and type as in vertex shader)
+varying vec2 texcoords2;
+
+// returns luma of given texel
+float luma(vec3 texel) {
+  return (texel.r + texel.g + texel.b)/3.0;
+}
+
+void main() {
+  // texture2D(texture, texcoords2) samples texture at texcoords2 
+  // and returns the normalized texel color
+  vec4 texel = texture2D(texture, texcoords2);
+  gl_FragColor = grey_scale ? vec4((vec3(luma(texel.rgb))), 1.0) : texel;
+}
+```
+{{< /details >}}
+
+{{< p5-iframe sketch="/project/sketches/luma3.js" lib1="https://cdn.jsdelivr.net/gh/VisualComputing/p5.treegl/p5.treegl.js"  width="720" height="550">}}
